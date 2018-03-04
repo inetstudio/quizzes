@@ -6,9 +6,9 @@ use League\Fractal\Manager;
 use Illuminate\Support\Facades\Session;
 use League\Fractal\Serializer\DataArraySerializer;
 use InetStudio\Quizzes\Contracts\Models\QuizModelContract;
-use InetStudio\Quizzes\Contracts\Services\Back\Quizzes\QuizzesServiceContract;
 use InetStudio\Quizzes\Contracts\Repositories\QuizzesRepositoryContract;
 use InetStudio\Quizzes\Contracts\Http\Requests\Back\SaveQuizRequestContract;
+use InetStudio\Quizzes\Contracts\Services\Back\Quizzes\QuizzesServiceContract;
 
 /**
  * Class QuizzesService.

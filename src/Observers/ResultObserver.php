@@ -83,5 +83,5 @@ class ResultObserver implements ResultObserverContract
     public function deleted(ResultModelContract $item): void
     {
         $this->services['resultsObserver']->deleted($item);
-    }    
+    }
 }

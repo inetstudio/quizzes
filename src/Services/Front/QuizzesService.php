@@ -63,7 +63,7 @@ class QuizzesService implements QuizzesServiceContract
      *
      * @throws \Throwable
      */
-    public function getQuizResult(int $id = 0, $userAnswers)
+    public function getQuizResult(int $id, $userAnswers)
     {
         $quiz = $this->quizzesRepository->getItemByID($id);
 

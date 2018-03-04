@@ -83,5 +83,5 @@ class QuestionObserver implements QuestionObserverContract
     public function deleted(QuestionModelContract $item): void
     {
         $this->services['questionsObserver']->deleted($item);
-    }    
+    }
 }

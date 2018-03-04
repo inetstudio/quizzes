@@ -29,7 +29,7 @@ class ResultMail extends Mailable implements ResultMailContract
      *
      * @return $this
      */
-    public function build(): ResultMail
+    public function build(): self
     {
         return $this->to($this->recipient)
             ->subject('Результаты теста')

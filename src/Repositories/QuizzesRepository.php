@@ -52,7 +52,7 @@ class QuizzesRepository implements QuizzesRepositoryContract
      */
     public function itemExist(int $id): bool
     {
-        return (! (! is_null($id) && $id > 0 && $item = $this->model::find($id)));
+        return ! (! is_null($id) && $id > 0 && $item = $this->model::find($id));
     }
 
     /**
@@ -119,7 +119,7 @@ class QuizzesRepository implements QuizzesRepositoryContract
     public function searchItemsByField(string $field, string $value, bool $returnBuilder = false)
     {
         $builder = $this->getItemsQuery()->where($field, 'LIKE', '%'.$value.'%');
-        
+
         if ($returnBuilder) {
             return $builder;
         }
@@ -137,7 +137,7 @@ class QuizzesRepository implements QuizzesRepositoryContract
     public function getAllItems(bool $returnBuilder = false)
     {
         $builder = $this->getItemsQuery(['created_at', 'updated_at']);
-        
+
         if ($returnBuilder) {
             return $builder;
         }

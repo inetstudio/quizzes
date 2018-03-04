@@ -83,5 +83,5 @@ class QuizObserver implements QuizObserverContract
     public function deleted(QuizModelContract $item): void
     {
         $this->services['quizzesObserver']->deleted($item);
-    }    
+    }
 }

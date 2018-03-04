@@ -130,7 +130,7 @@ class ResultsRepository implements ResultsRepositoryContract
     public function searchItemsByField(string $field, string $value, bool $returnBuilder = false)
     {
         $builder = $this->getItemsQuery()->where($field, 'LIKE', '%'.$value.'%');
-        
+
         if ($returnBuilder) {
             return $builder;
         }
@@ -148,7 +148,7 @@ class ResultsRepository implements ResultsRepositoryContract
     public function getAllItems(bool $returnBuilder = false)
     {
         $builder = $this->getItemsQuery(['created_at', 'updated_at']);
-        
+
         if ($returnBuilder) {
             return $builder;
         }

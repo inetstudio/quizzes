@@ -1,0 +1,27 @@
+{
+    "name": "inetstudio/quizzes",
+    "description": "Package for quizzes",
+    "homepage": "https://github.com/inetstudio/quizzes",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Konstantin Bukin",
+        "email": "bukin@inetstudio.ru"
+      }
+    ],
+    "require": {
+      "inetstudio/admin-panel": "1.5.*"
+    },
+    "autoload": {
+      "psr-4": {
+        "InetStudio\\Quizzes\\": "src/"
+      }
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "InetStudio\\Quizzes\\Providers\\QuizzesServiceProvider"
+        ]
+      }
+    }
+}

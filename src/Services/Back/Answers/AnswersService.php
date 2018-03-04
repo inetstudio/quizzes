@@ -96,7 +96,6 @@ class AnswersService implements AnswersServiceContract
                 ->attachToObject($request, $item, $images, 'quizzes', 'answer');
 
             if ($request->filled('answer.association.'.$id)) {
-
                 $assocResults = [];
 
                 collect($request->input('answer.association.'.$id))->each(function ($item, $key) use ($results, &$assocResults) {
@@ -122,5 +121,5 @@ class AnswersService implements AnswersServiceContract
     public function destroy(int $id): ?bool
     {
         return $this->repository->destroy($id);
-    }    
+    }
 }

@@ -72,7 +72,7 @@ class SaveQuizRequest extends FormRequest implements SaveQuizRequestContract
             'preview.filename' => 'required',
             'preview.crop.album' => [
                 'required', 'json',
-                new CropSize(392,294,'min', 'Альбомная ориентация'),
+                new CropSize(392, 294, 'min', 'Альбомная ориентация'),
             ],
             'result_type' => 'required',
 
@@ -81,7 +81,7 @@ class SaveQuizRequest extends FormRequest implements SaveQuizRequestContract
             ],
             'result.preview.*.crop.album' => [
                 'nullable', 'json',
-                new CropSize(448,336,'min', 'Альбомная ориентация'),
+                new CropSize(448, 336, 'min', 'Альбомная ориентация'),
             ],
             'result.min_points.*' => 'nullable|integer',
             'result.max_points.*' => 'nullable|integer',
@@ -91,15 +91,15 @@ class SaveQuizRequest extends FormRequest implements SaveQuizRequestContract
             ],
             'question.preview.*.crop.album' => [
                 'nullable', 'json',
-                new CropSize(448,336,'min', 'Альбомная ориентация'),
+                new CropSize(448, 336, 'min', 'Альбомная ориентация'),
             ],
             'question.preview.*.crop.portrait' => [
                 'nullable', 'json',
-                new CropSize(448,620,'min', 'Портретная ориентация'),
+                new CropSize(448, 620, 'min', 'Портретная ориентация'),
             ],
             'question.preview.*.crop.square' => [
                 'nullable', 'json',
-                new CropSize(448,448,'min', 'Квадратное изображение'),
+                new CropSize(448, 448, 'min', 'Квадратное изображение'),
             ],
 
             'answer.preview.*.crop' => [
@@ -107,7 +107,7 @@ class SaveQuizRequest extends FormRequest implements SaveQuizRequestContract
             ],
             'answer.preview.*.crop.album' => [
                 'nullable', 'json',
-                new CropSize(190,178,'min', 'Альбомная ориентация'),
+                new CropSize(190, 178, 'min', 'Альбомная ориентация'),
             ],
             'answer.points.*' => 'nullable|integer',
         ];

@@ -42,7 +42,7 @@ class GetQuizDataRequest extends FormRequest implements GetQuizDataRequestContra
     public function rules()
     {
         return [
-            'id' => 'required|integer|exists:quizzes'
+            'id' => 'required|integer|exists:quizzes',
         ];
     }
 }

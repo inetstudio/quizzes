@@ -17,7 +17,7 @@ class ResultModel extends Model implements ResultModelContract, HasMediaConversi
 
     protected $images = [
         'config' => 'quizzes',
-        'model' => 'quiz',
+        'model' => 'result',
     ];
 
     /**

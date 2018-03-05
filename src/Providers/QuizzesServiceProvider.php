@@ -177,6 +177,7 @@ class QuizzesServiceProvider extends ServiceProvider
 
         // Transformers
         $this->app->bind('InetStudio\Quizzes\Contracts\Transformers\Back\QuizTransformerContract', 'InetStudio\Quizzes\Transformers\Back\QuizTransformer');
+        $this->app->bind('InetStudio\Quizzes\Contracts\Transformers\Back\SuggestionTransformerContract', 'InetStudio\Quizzes\Transformers\Back\SuggestionTransformer');
         $this->app->bind('InetStudio\Quizzes\Contracts\Transformers\Front\AnswerTransformerContract', 'InetStudio\Quizzes\Transformers\Front\AnswerTransformer');
         $this->app->bind('InetStudio\Quizzes\Contracts\Transformers\Front\QuestionTransformerContract', 'InetStudio\Quizzes\Transformers\Front\QuestionTransformer');
         $this->app->bind('InetStudio\Quizzes\Contracts\Transformers\Front\QuizTransformerContract', 'InetStudio\Quizzes\Transformers\Front\QuizTransformer');

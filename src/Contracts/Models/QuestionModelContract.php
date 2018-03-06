@@ -7,4 +7,7 @@ namespace InetStudio\Quizzes\Contracts\Models;
  */
 interface QuestionModelContract
 {
+    public function find();
+
+    public function select();
 }

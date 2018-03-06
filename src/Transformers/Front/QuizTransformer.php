@@ -45,7 +45,10 @@ class QuizTransformer extends TransformerAbstract implements QuizTransformerCont
             'type' => $item->getAttribute('quiz_type'),
             'title' => $item->getAttribute('title'),
             'description' => $item->getAttribute('description'),
-            'img' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),
+            'img' => [
+                'src' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),
+                'properties' => $this->services['images']->getImageProperties($item, 'preview'),
+            ],
         ];
     }
 

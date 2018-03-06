@@ -4,8 +4,8 @@ namespace InetStudio\Quizzes\Services\Back\Quizzes;
 
 use League\Fractal\Manager;
 use Illuminate\Support\Facades\Session;
-use League\Fractal\Serializer\DataArraySerializer;
 use InetStudio\Quizzes\Contracts\Models\QuizModelContract;
+use InetStudio\AdminPanel\Serializers\SimpleDataArraySerializer;
 use InetStudio\Quizzes\Contracts\Repositories\QuizzesRepositoryContract;
 use InetStudio\Quizzes\Contracts\Http\Requests\Back\SaveQuizRequestContract;
 use InetStudio\Quizzes\Contracts\Services\Back\Quizzes\QuizzesServiceContract;
@@ -122,16 +122,16 @@ class QuizzesService implements QuizzesServiceContract
         ]))->transformCollection($items);
 
         $manager = new Manager();
-        $manager->setSerializer(new DataArraySerializer());
+        $manager->setSerializer(new SimpleDataArraySerializer());
 
         $transformation = $manager->createData($resource)->toArray();
 
         $data = [];
 
         if ($type && $type == 'autocomplete') {
-            $data['suggestions'] = $transformation['data'];
+            $data['suggestions'] = $transformation;
         } else {
-            $data['items'] = $transformation['data'];
+            $data['items'] = $transformation;
         }
 
         return $data;

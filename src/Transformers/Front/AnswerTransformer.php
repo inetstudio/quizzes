@@ -37,7 +37,10 @@ class AnswerTransformer extends TransformerAbstract implements AnswerTransformer
             'answer' => $item->getAttribute('title'),
             'description' => $item->getAttribute('description'),
             'points' => (int) $item->getAttribute('points'),
-            'img' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),
+            'img' => [
+                'src' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),
+                'properties' => $this->services['images']->getImageProperties($item, 'preview'),
+            ],
         ];
     }
 }

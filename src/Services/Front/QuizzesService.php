@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 use League\Fractal\Manager;
 use Illuminate\Support\Facades\Mail;
 use League\Fractal\Resource\Item as FractalItem;
-use League\Fractal\Serializer\DataArraySerializer;
+use InetStudio\AdminPanel\Serializers\SimpleDataArraySerializer;
 use InetStudio\Quizzes\Contracts\Services\Front\QuizzesServiceContract;
 
 /**
@@ -43,7 +43,7 @@ class QuizzesService implements QuizzesServiceContract
         $resource = new FractalItem($quiz, app()->make('InetStudio\Quizzes\Transformers\Front\QuizTransformer'));
 
         $manager = new Manager();
-        $manager->setSerializer(new DataArraySerializer());
+        $manager->setSerializer(new SimpleDataArraySerializer());
 
         $data = $manager->createData($resource)->toArray();
 
@@ -89,7 +89,7 @@ class QuizzesService implements QuizzesServiceContract
         $resource = new FractalItem($userResult, app()->make('InetStudio\Quizzes\Transformers\Front\ResultTransformer'));
 
         $manager = new Manager();
-        $manager->setSerializer(new DataArraySerializer());
+        $manager->setSerializer(new SimpleDataArraySerializer());
 
         $data = $manager->createData($resource)->toArray();
 
@@ -125,12 +125,9 @@ class QuizzesService implements QuizzesServiceContract
             }
         }
 
-        foreach ($quiz->results as $result) {
-            if ($result->min_points <= $points and $result->max_points >= $points) {
-                $userResult = $result;
-                break;
-            }
-        }
+        $userResult = $quiz->results->filter(function ($item) use ($points) {
+            return $item->min_points <= $points and $item->max_points >= $points;
+        })->first();
 
         if (! $userResult) {
             $userResult = $quiz->results->sortByDesc('max_points')->first();

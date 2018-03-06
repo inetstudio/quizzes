@@ -43,7 +43,10 @@ class QuestionTransformer extends TransformerAbstract implements QuestionTransfo
         return [
             'id' => (int) $item->getAttribute('id'),
             'question' => $item->getAttribute('title'),
-            'img' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),
+            'img' => [
+                'src' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),
+                'properties' => $this->services['images']->getImageProperties($item, 'preview'),
+            ],
         ];
     }
 

@@ -123,6 +123,8 @@ class QuizzesService implements QuizzesServiceContract
 
         $transformation = $manager->createData($resource)->toArray();
 
+        $data = [];
+
         if ($type && $type == 'autocomplete') {
             $data['suggestions'] = $transformation['data'];
         } else {

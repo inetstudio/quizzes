@@ -37,10 +37,10 @@ class QuizzesRepository implements QuizzesRepositoryContract
     public function getItemByID(int $id): QuizModelContract
     {
         if (! (! is_null($id) && $id > 0 && $item = $this->model::find($id))) {
-            $item = $this->model;
+            $this->model = $item;
         }
 
-        return $item;
+        return $this->model;
     }
 
     /**
@@ -86,10 +86,10 @@ class QuizzesRepository implements QuizzesRepositoryContract
     {
         $item = $this->getItemByID($id);
 
-        $item->quiz_type = strip_tags($request->get('quiz_type'));
-        $item->title = strip_tags($request->get('title'));
-        $item->description = $request->input('description.text');
-        $item->result_type = strip_tags($request->input('result_type'));
+        $item->setAttribute('quiz_type', strip_tags($request->get('quiz_type')));
+        $item->setAttribute('title', strip_tags($request->get('title')));
+        $item->setAttribute('description', $request->input('description.text'));
+        $item->setAttribute('result_type', strip_tags($request->input('result_type')));
         $item->save();
 
         return $item;

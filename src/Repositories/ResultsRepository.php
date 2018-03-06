@@ -38,10 +38,10 @@ class ResultsRepository implements ResultsRepositoryContract
     public function getItemByID($id): ResultModelContract
     {
         if (! (! is_null($id) && $id > 0 && $item = $this->model::find($id))) {
-            $item = $this->model;
+            $this->model = $item;
         }
 
-        return $item;
+        return $this->model;
     }
 
     /**
@@ -95,12 +95,13 @@ class ResultsRepository implements ResultsRepositoryContract
     {
         $item = $this->getItemByID($id);
 
-        $item->quiz_id = $quiz->id;
-        $item->title = trim(strip_tags($request->input('result.title.'.$id)));
-        $item->min_points = (int) trim(strip_tags($request->input('result.min_points.'.$id)));
-        $item->max_points = (int) trim(strip_tags($request->input('result.max_points.'.$id)));
-        $item->short_description = $request->input('result.short_description.'.$id.'.text');
-        $item->full_description = $request->input('result.full_description.'.$id.'.text');
+        $item->setAttribute('quiz_id', $quiz->getAttribute('id'));
+        $item->setAttribute('title', trim(strip_tags($request->input('result.title.'.$id))));
+        $item->setAttribute('min_points', (int) trim(strip_tags($request->input('result.min_points.'.$id))));
+        $item->setAttribute('max_points', (int) trim(strip_tags($request->input('result.max_points.'.$id))));
+        $item->setAttribute('short_description', $request->input('result.short_description.'.$id.'.text'));
+        $item->setAttribute('full_description', $request->input('result.full_description.'.$id.'.text'));
+
         $item->save();
 
         return $item;

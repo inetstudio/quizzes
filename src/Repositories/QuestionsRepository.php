@@ -38,10 +38,10 @@ class QuestionsRepository implements QuestionsRepositoryContract
     public function getItemByID($id): QuestionModelContract
     {
         if (! (! is_null($id) && $id > 0 && $item = $this->model::find($id))) {
-            $item = $this->model;
+            $this->model = $item;
         }
 
-        return $item;
+        return $this->model;
     }
 
     /**
@@ -95,8 +95,9 @@ class QuestionsRepository implements QuestionsRepositoryContract
     {
         $item = $this->getItemByID($id);
 
-        $item->quiz_id = $quiz->id;
-        $item->title = trim(strip_tags($request->input('question.title.'.$id)));
+        $item->setAttribute('quiz_id', $quiz->getAttribute('id'));
+        $item->setAttribute('title', trim(strip_tags($request->input('question.title.'.$id))));
+
         $item->save();
 
         return $item;

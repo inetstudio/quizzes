@@ -39,22 +39,22 @@ class ResultTransformer extends TransformerAbstract implements ResultTransformer
      */
     public function transform(ResultModelContract $item)
     {
-        $quiz = $item->quiz;
+        $quiz = $item->getAttribute('quiz');
 
         $result = '';
         switch ($quiz->result_type) {
             case 'full':
-                $result = $item->full_description;
+                $result = $item->getAttribute('full_description');
                 break;
 
             case 'short_email':
-                $result = $item->short_description;
+                $result = $item->getAttribute('short_description');
                 break;
         }
 
         return [
-            'id' => (int) $item->id,
-            'title' => $item->quiz_type,
+            'id' => (int) $item->getAttribute('id'),
+            'title' => $item->getAttribute('quiz_type'),
             'result' => $result,
             'img' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),
         ];
@@ -69,6 +69,6 @@ class ResultTransformer extends TransformerAbstract implements ResultTransformer
      */
     public function includeAnswers(ResultModelContract $item)
     {
-        return $this->item($item->quiz, app()->make('InetStudio\Quizzes\Transformers\Front\QuizTransformer'));
+        return $this->item($item->getAttribute('quiz'), app()->make('InetStudio\Quizzes\Transformers\Front\QuizTransformer'));
     }
 }

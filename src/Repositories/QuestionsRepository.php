@@ -37,11 +37,7 @@ class QuestionsRepository implements QuestionsRepositoryContract
      */
     public function getItemByID($id): QuestionModelContract
     {
-        if (! (! is_null($id) && $id > 0 && $item = $this->model::find($id))) {
-            $this->model = $item;
-        }
-
-        return $this->model;
+        return $this->model::find($id) ?? $this->model;
     }
 
     /**

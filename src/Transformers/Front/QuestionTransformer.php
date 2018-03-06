@@ -41,8 +41,8 @@ class QuestionTransformer extends TransformerAbstract implements QuestionTransfo
     public function transform(QuestionModelContract $item)
     {
         return [
-            'id' => (int) $item->id,
-            'question' => $item->title,
+            'id' => (int) $item->getAttribute('id'),
+            'question' => $item->getAttribute('title'),
             'img' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),
         ];
     }
@@ -56,6 +56,6 @@ class QuestionTransformer extends TransformerAbstract implements QuestionTransfo
      */
     public function includeAnswers(QuestionModelContract $item)
     {
-        return new FractalCollection($item->answers, app()->make('InetStudio\Quizzes\Transformers\Front\AnswerTransformer'));
+        return new FractalCollection($item->getAttribute('answers'), app()->make('InetStudio\Quizzes\Transformers\Front\AnswerTransformer'));
     }
 }

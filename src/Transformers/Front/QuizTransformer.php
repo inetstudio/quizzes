@@ -41,10 +41,10 @@ class QuizTransformer extends TransformerAbstract implements QuizTransformerCont
     public function transform(QuizModelContract $item)
     {
         return [
-            'id' => (int) $item->id,
-            'type' => $item->quiz_type,
-            'title' => $item->title,
-            'description' => $item->description,
+            'id' => (int) $item->getAttribute('id'),
+            'type' => $item->getAttribute('quiz_type'),
+            'title' => $item->getAttribute('title'),
+            'description' => $item->getAttribute('description'),
             'img' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),
         ];
     }
@@ -58,6 +58,6 @@ class QuizTransformer extends TransformerAbstract implements QuizTransformerCont
      */
     public function includeQuestions(QuizModelContract $item)
     {
-        return new FractalCollection($item->questions, app()->make('InetStudio\Quizzes\Transformers\Front\QuestionTransformer'));
+        return new FractalCollection($item->getAttribute('questions'), app()->make('InetStudio\Quizzes\Transformers\Front\QuestionTransformer'));
     }
 }

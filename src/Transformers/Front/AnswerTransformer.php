@@ -33,10 +33,10 @@ class AnswerTransformer extends TransformerAbstract implements AnswerTransformer
     public function transform(AnswerModelContract $item)
     {
         return [
-            'id' => (int) $item->id,
-            'answer' => $item->title,
-            'description' => $item->description,
-            'points' => (int) $item->points,
+            'id' => (int) $item->getAttribute('id'),
+            'answer' => $item->getAttribute('title'),
+            'description' => $item->getAttribute('description'),
+            'points' => (int) $item->getAttribute('points'),
             'img' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),
         ];
     }

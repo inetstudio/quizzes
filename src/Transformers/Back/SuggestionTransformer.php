@@ -42,17 +42,17 @@ class SuggestionTransformer extends TransformerAbstract implements SuggestionTra
             $modelClass = get_class($item);
 
             return [
-                'value' => $item->title,
+                'value' => $item->getAttribute('title'),
                 'data' => [
-                    'id' => $item->id,
+                    'id' => $item->getAttribute('id'),
                     'type' => $modelClass,
-                    'title' => $item->title,
+                    'title' => $item->getAttribute('title'),
                 ],
             ];
         } else {
             return [
-                'id' => $item->id,
-                'name' => $item->title,
+                'id' => $item->getAttribute('id'),
+                'name' => $item->getAttribute('title'),
             ];
         }
     }

@@ -67,8 +67,8 @@ class QuestionsService implements QuestionsServiceContract
 
         $ids = is_array($ids) ? $ids : [];
 
-        $this->repository->getItemsByQuiz($quiz->id, true)->whereNotIn('id', $ids)->get()->each(function (QuestionModelContract $question) {
-            $this->repository->destroy($question->id);
+        $this->repository->getItemsByQuiz($quiz->getAttribute('id'), true)->whereNotIn('id', $ids)->get()->each(function (QuestionModelContract $question) {
+            $this->repository->destroy($question->getAttribute('id'));
         });
 
         $questions = [];

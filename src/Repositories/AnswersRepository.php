@@ -91,7 +91,7 @@ class AnswersRepository implements AnswersRepositoryContract
     {
         $item = $this->getItemByID($id);
 
-        $item->setAttribute('quiz_question_id', $quizQuestion->id);
+        $item->setAttribute('quiz_question_id', $quizQuestion->getAttribute('id'));
         $item->setAttribute('title', trim(strip_tags($request->input('answer.title.'.$id))));
         $item->setAttribute('description', $request->input('answer.description.'.$id.'.text'));
         $item->setAttribute('points', (int) trim(strip_tags($request->input('answer.points.'.$id))));

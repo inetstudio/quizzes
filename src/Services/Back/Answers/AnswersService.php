@@ -70,7 +70,7 @@ class AnswersService implements AnswersServiceContract
         $questionsIDs = collect($questions)->pluck('id')->toArray();
 
         $this->repository->getItemsByQuestionsIDs($questionsIDs, true)->whereNotIn('id', $ids)->get()->each(function (AnswerModelContract $answer) {
-            $this->repository->destroy($answer->id);
+            $this->repository->destroy($answer->getAttribute('id'));
         });
 
         $answers = [];

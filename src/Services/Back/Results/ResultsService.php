@@ -67,8 +67,8 @@ class ResultsService implements ResultsServiceContract
 
         $ids = is_array($ids) ? $ids : [];
 
-        $this->repository->getItemsByQuiz($quiz->id, true)->whereNotIn('id', $ids)->get()->each(function (ResultModelContract $result) {
-            $this->repository->destroy($result->id);
+        $this->repository->getItemsByQuiz($quiz->getAttribute('id'), true)->whereNotIn('id', $ids)->get()->each(function (ResultModelContract $result) {
+            $this->repository->destroy($result->getAttribute('id'));
         });
 
         $results = [];

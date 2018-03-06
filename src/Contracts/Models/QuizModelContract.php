@@ -13,12 +13,12 @@ interface QuizModelContract
      * @param mixed $id
      * @param array $columns
      */
-    public function find($id, $columns = ['*']);
+    //public function find($id, $columns = ['*']);
 
     /**
      * Устанавливаем колонки для выбора.
      *
      * @param array|mixed $columns
      */
-    public function select($columns = ['*']);
+    //public function select($columns = ['*']);
 }

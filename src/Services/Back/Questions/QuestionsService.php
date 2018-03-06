@@ -76,12 +76,11 @@ class QuestionsService implements QuestionsServiceContract
         foreach ($ids as $id) {
             $item = $this->repository->save($request, $quiz, $id);
 
-            $images = [];
-            if (config('quizzes.images.conversions.question')) {
-                foreach (config('quizzes.images.conversions.question') as $image => $data) {
-                    $images['question.'.$image.'.'.$id] = $image;
-                }
-            }
+            $images = collect(config('quizzes.images.conversions.question'))->mapWithKeys(function ($item) use ($id) {
+                $image = key($item);
+
+                return ['question.'.$image.'.'.$id => $image];
+            })->toArray();
 
             app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract')
                 ->attachToObject($request, $item, $images, 'quizzes', 'question');

@@ -68,7 +68,10 @@ class QuizzesService implements QuizzesServiceContract
         $action = ($id) ? 'отредактирован' : 'создан';
         $item = $this->repository->save($request, $id);
 
-        $images = (config('quizzes.images.conversions.quiz')) ? array_keys(config('quizzes.images.conversions.quiz')) : [];
+        $images = collect(config('quizzes.images.conversions.result'))->map(function ($item) use ($id) {
+            return key($item);
+        })->toArray();
+
         app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract')
             ->attachToObject($request, $item, $images, 'quizzes', 'quiz');
 

@@ -70,7 +70,7 @@ class ResultTransformer extends TransformerAbstract implements ResultTransformer
      *
      * @return \League\Fractal\Resource\Item
      */
-    public function includeAnswers(ResultModelContract $item)
+    public function includeQuiz(ResultModelContract $item)
     {
         return $this->item($item->getAttribute('quiz'), app()->make('InetStudio\Quizzes\Transformers\Front\QuizTransformer'));
     }

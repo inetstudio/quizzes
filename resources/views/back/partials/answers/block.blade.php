@@ -34,7 +34,7 @@
 
                 @if ($quizType == 'trivia')
 
-                    {!! Form::wysiwyg('description', (isset($key)) ? old('answer.description.'.$key) : $item->description, [
+                    {!! Form::wysiwyg('description', $item->description, [
                         'label' => [
                             'title' => 'Описание',
                         ],

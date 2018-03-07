@@ -37,7 +37,7 @@ class ResultsRepository implements ResultsRepositoryContract
      */
     public function getItemByID($id): ResultModelContract
     {
-        return $this->model::find($id) ?? $this->model;
+        return $this->model::find($id) ?? new $this->model;
     }
 
     /**

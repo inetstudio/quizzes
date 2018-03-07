@@ -36,7 +36,7 @@ class QuizzesRepository implements QuizzesRepositoryContract
      */
     public function getItemByID(int $id): QuizModelContract
     {
-        return $this->model::find($id) ?? $this->model;
+        return $this->model::find($id) ?? new $this->model;
     }
 
     /**

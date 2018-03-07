@@ -37,7 +37,7 @@ class AnswersRepository implements AnswersRepositoryContract
      */
     public function getItemByID($id): AnswerModelContract
     {
-        return $this->model::find($id) ?? $this->model;
+        return $this->model::find($id) ?? new $this->model;
     }
 
     /**

@@ -85,10 +85,8 @@ class AnswersService implements AnswersServiceContract
 
             $item = $this->repository->save($request, $question, $id);
 
-            $images = collect(config('quizzes.images.conversions.answer'))->mapWithKeys(function ($item) use ($id) {
-                $image = key($item);
-
-                return ['answer.'.$image.'.'.$id => $image];
+            $images = collect(config('quizzes.images.conversions.answer'))->mapWithKeys(function ($item, $key) use ($id) {
+                return ['answer.'.$key.'.'.$id => $key];
             })->toArray();
 
             app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract')

@@ -27,7 +27,7 @@ class SuggestionsResponse implements SuggestionsResponseContract, Responsable
     }
 
     /**
-     * Возвращаем slug по заголовку объекта.
+     * Возвращаем ответ с подсказками.
      *
      * @param \Illuminate\Http\Request $request
      *

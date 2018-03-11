@@ -27,7 +27,7 @@ class SendResultToEmailResponse implements SendResultToEmailResponseContract, Re
     }
 
     /**
-     * Возвращаем slug по заголовку объекта.
+     * Возвращаем ответ при отправке результата на почту.
      *
      * @param \Illuminate\Http\Request $request
      *

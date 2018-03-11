@@ -147,6 +147,22 @@ class QuizzesService implements QuizzesServiceContract
     protected function getPersonalResult($quiz, $userAnswers)
     {
         $quizAnswers = [];
+        /*
+        $quizAnswers = $quiz->questions->mapToGroups(function ($question) {
+            return [
+                $question->id => $question->answers->mapToGroups(function ($answer) {
+                    return [
+                        $answer->id => $answer->results->mapToGroups(function ($result) {
+                            return [
+                                $result->id => (int) $result->pivot->association,
+                            ];
+                        }),
+                    ];
+                }),
+            ];
+        })->toArray();
+        */
+
         foreach ($quiz->questions as $question) {
             foreach ($question->answers as $answer) {
                 foreach ($answer->results as $result) {
@@ -199,6 +215,7 @@ class QuizzesService implements QuizzesServiceContract
             ]));
 
         return [
+            'message' => 'Результат теста отправлен на указанный email',
             'success' => true,
         ];
     }

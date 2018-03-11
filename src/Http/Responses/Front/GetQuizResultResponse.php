@@ -27,7 +27,7 @@ class GetQuizResultResponse implements GetQuizResultResponseContract, Responsabl
     }
 
     /**
-     * Возвращаем slug по заголовку объекта.
+     * Возвращаем ответ при выводе результатов теста.
      *
      * @param \Illuminate\Http\Request $request
      *

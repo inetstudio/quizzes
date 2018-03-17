@@ -56,10 +56,10 @@ class SendResultToEmailRequest extends FormRequest implements SendResultToEmailR
     public function rules(Request $request)
     {
         return [
-            'quiz_id' => 'required|integer|exists:quizzes',
+            'quiz_id' => 'required|integer|exists:quizzes,id',
             'result_id' => [
                 'required', 'integer',
-                Rule::exists('quizzes_results')->where(function ($query) use ($request) {
+                Rule::exists('quizzes_results', 'id')->where(function ($query) use ($request) {
                     $query->where('quiz_id', $request->get('quiz_id'));
                 }),
             ],

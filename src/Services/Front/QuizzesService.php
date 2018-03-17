@@ -210,9 +210,9 @@ class QuizzesService implements QuizzesServiceContract
         ];
 
         Mail::send(app()->makeWith('InetStudio\Quizzes\Contracts\Mail\ResultMailContract', [
-                'recipient' => $email,
-                'data' => $data,
-            ]));
+            'recipient' => $email,
+            'data' => $data,
+        ]));
 
         return [
             'message' => 'Результат теста отправлен на указанный email',

@@ -17,6 +17,7 @@ class QuizzesService implements QuizzesServiceContract
     private $quizzesRepository;
     private $resultsRepository;
     private $services = [];
+    private $dataManager;
 
     /**
      * QuizzesService constructor.
@@ -27,6 +28,9 @@ class QuizzesService implements QuizzesServiceContract
         $this->resultsRepository = app()->make('InetStudio\Quizzes\Contracts\Repositories\ResultsRepositoryContract');
 
         $this->services['images'] = app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract');
+
+        $this->dataManager = new Manager();
+        $this->dataManager->setSerializer(new SimpleDataArraySerializer());
     }
 
     /**
@@ -42,14 +46,32 @@ class QuizzesService implements QuizzesServiceContract
 
         $resource = new FractalItem($quiz, app()->make('InetStudio\Quizzes\Transformers\Front\QuizTransformer'));
 
-        $manager = new Manager();
-        $manager->setSerializer(new SimpleDataArraySerializer());
-
-        $data = $manager->createData($resource)->toArray();
+        $data = $this->dataManager->createData($resource)->toArray();
 
         return [
             'success' => true,
             'quiz' => $data,
+        ];
+    }
+
+    /**
+     * Получаем информацию по результату.
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function getResultData(int $id = 0): array
+    {
+        $result = $this->resultsRepository->getItemByID($id);
+
+        $resource = new FractalItem($result, app()->make('InetStudio\Quizzes\Transformers\Front\ResultTransformer'));
+
+        $data = $this->dataManager->createData($resource)->toArray();
+
+        return [
+            'success' => true,
+            'result' => $data,
         ];
     }
 
@@ -88,10 +110,7 @@ class QuizzesService implements QuizzesServiceContract
 
         $resource = new FractalItem($userResult, app()->make('InetStudio\Quizzes\Transformers\Front\ResultTransformer'));
 
-        $manager = new Manager();
-        $manager->setSerializer(new SimpleDataArraySerializer());
-
-        $data = $manager->createData($resource)->toArray();
+        $data = $this->dataManager->createData($resource)->toArray();
 
         return [
             'success' => true,

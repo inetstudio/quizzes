@@ -56,7 +56,7 @@ class ResultTransformer extends TransformerAbstract implements ResultTransformer
             'id' => (int) $item->getAttribute('id'),
             'type' => $quiz->getAttribute('result_type'),
             'title' => $item->getAttribute('title'),
-            'quiTitle' => $quiz->getAttribute('title'),
+            'quizTitle' => $quiz->getAttribute('title'),
             'result' => $result,
             'img' => [
                 'src' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),

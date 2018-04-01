@@ -26,7 +26,7 @@
 
         {!! Form::info() !!}
 
-        {!! Form::open(['url' => (! $item->id) ? route('back.quizzes.store') : route('back.quizzes.update', [$item->id]), 'id' => 'mainForm', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
+        {!! Form::open(['url' => (! $item->id) ? route('back.quizzes.store') : route('back.quizzes.update', [$item->id]), 'id' => 'mainForm', 'enctype' => 'multipart/form-data', 'class' => 'quizz-form form-horizontal']) !!}
 
             @if ($item->id)
                 {{ method_field('PUT') }}
@@ -273,13 +273,3 @@
         @endif
     </div>
 @endsection
-
-@pushonce('styles:quizzes_custom')
-    <!-- quizzes CUSTOM -->
-    <link href="{{ asset('admin/css/modules/quizzes/custom.css') }}" rel="stylesheet">
-@endpushonce
-
-@pushonce('scripts:quizzes_custom')
-    <!-- quizzes CUSTOM -->
-    <script src="{!! asset('admin/js/modules/quizzes/custom.js') !!}"></script>
-@endpushonce

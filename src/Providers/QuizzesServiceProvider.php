@@ -56,10 +56,6 @@ class QuizzesServiceProvider extends ServiceProvider
     protected function registerPublishes(): void
     {
         $this->publishes([
-            __DIR__.'/../../public' => public_path(),
-        ], 'public');
-
-        $this->publishes([
             __DIR__.'/../../config/quizzes.php' => config_path('quizzes.php'),
         ], 'config');
 

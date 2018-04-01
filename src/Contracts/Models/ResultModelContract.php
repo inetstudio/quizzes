@@ -7,7 +7,7 @@ namespace InetStudio\Quizzes\Contracts\Models;
  */
 interface ResultModelContract
 {
-    /**
+    /*
      * Находим объект по первичному ключу.
      *
      * @param mixed $id
@@ -15,7 +15,7 @@ interface ResultModelContract
      */
     //public function find($id, $columns = ['*']);
 
-    /**
+    /*
      * Устанавливаем колонки для выбора.
      *
      * @param array|mixed $columns

@@ -3,8 +3,8 @@
 namespace InetStudio\Quizzes\Transformers\Back;
 
 use League\Fractal\TransformerAbstract;
-use League\Fractal\Resource\Collection as FractalCollection;
 use InetStudio\Quizzes\Contracts\Models\QuizModelContract;
+use League\Fractal\Resource\Collection as FractalCollection;
 use InetStudio\Quizzes\Contracts\Transformers\Back\SuggestionTransformerContract;
 
 /**

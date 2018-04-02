@@ -82,6 +82,11 @@ class QuizzesController extends Controller implements QuizzesControllerContract
         $url = $request->get('current_url');
         $email = $request->get('email');
 
+        if ($request->has('subscribe-agree-quiz')) {
+            $subscriptionService = app()->make('SubscriptionService');
+            $subscriptionService->subscribeByRequest($request);
+        }
+
         $data = $this->services['quizzes']->sendResultToEmail($quizId, $resultId, $url, $email);
 
         return app()->makeWith('InetStudio\Quizzes\Contracts\Http\Responses\Front\SendResultToEmailResponseContract', [

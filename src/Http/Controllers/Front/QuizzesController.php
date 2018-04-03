@@ -82,7 +82,7 @@ class QuizzesController extends Controller implements QuizzesControllerContract
         $url = $request->get('current_url');
         $email = $request->get('email');
 
-        if ($request->has('subscribe-agree-quiz')) {
+        if ($request->has('subscribe-agree')) {
             $subscriptionService = app()->make('SubscriptionService');
             $subscriptionService->subscribeByRequest($request);
         }

@@ -1,7 +1,7 @@
 window.tinymce.PluginManager.add('quizzes', function (editor) {
     editor.addButton('add_quiz_widget', {
         title: 'Тесты',
-        image: '/images/tinymce-button-quizzes-add-widget.png',
+        image: '/admin/images/tinymce-button-quizzes-add-widget.png',
         onclick: function () {
             editor.focus();
 

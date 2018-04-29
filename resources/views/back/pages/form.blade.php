@@ -272,4 +272,7 @@
             </div>
         @endif
     </div>
+
+    @include('admin.module.products::back.pages.modals.suggestion')
+    
 @endsection

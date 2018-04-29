@@ -34,7 +34,7 @@
 
                 @if ($quizType == 'trivia')
 
-                    {!! Form::wysiwyg('description', $item->description, [
+                    {!! Form::wysiwyg('description', $item->getAttributes()['description'], [
                         'label' => [
                             'title' => 'Описание',
                         ],

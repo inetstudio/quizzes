@@ -47,6 +47,11 @@ class AnswerModel extends Model implements AnswerModelContract, HasMediaConversi
         'deleted_at',
     ];
 
+    public function getDescriptionAttribute($value)
+    {
+        return blade_string($value);
+    }
+
     protected $revisionCreationsEnabled = true;
 
     /**

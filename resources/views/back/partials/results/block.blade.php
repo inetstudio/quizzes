@@ -52,7 +52,7 @@
 
                 @endif
 
-                {!! Form::wysiwyg('short_description', $item->getAttributes()['short_description'], [
+                {!! Form::wysiwyg('short_description', $item->short_description, [
                     'label' => [
                         'title' => 'Короткий результат',
                     ],
@@ -81,7 +81,7 @@
                     ],
                 ]) !!}
 
-                {!! Form::wysiwyg('full_description', $item->getAttributes()['full_description'], [
+                {!! Form::wysiwyg('full_description', $item->full_description, [
                     'label' => [
                         'title' => 'Полный результат',
                     ],

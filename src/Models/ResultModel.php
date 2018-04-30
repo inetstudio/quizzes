@@ -48,16 +48,6 @@ class ResultModel extends Model implements ResultModelContract, HasMediaConversi
         'deleted_at',
     ];
 
-    public function getShortDescriptionAttribute($value)
-    {
-        return blade_string($value);
-    }
-
-    public function getFullDescriptionAttribute($value)
-    {
-        return blade_string($value);
-    }
-
     protected $revisionCreationsEnabled = true;
 
     /**

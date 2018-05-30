@@ -32,7 +32,9 @@
                 {{ method_field('PUT') }}
             @endif
 
-            {!! Form::hidden('quiz_id', (! $item->id) ? '' : $item->id) !!}
+            {!! Form::hidden('quiz_id', (! $item->id) ? '' : $item->id, ['id' => 'object-id']) !!}
+
+            {!! Form::hidden('quiz_type', get_class($item), ['id' => 'object-type']) !!}
 
             {!! Form::buttons('', '', ['back' => 'back.quizzes.index']) !!}
 

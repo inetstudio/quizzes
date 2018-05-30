@@ -5,20 +5,45 @@ window.tinymce.PluginManager.add('quizzes', function (editor) {
         onclick: function () {
             editor.focus();
 
+            let content = editor.selection.getContent();
+            let widgetID = '';
+
+            if (content !== '' && ! /<img class="content-widget".+data-type="quiz".+\/>/g.test(content)) {
+                swal({
+                    title: "Ошибка",
+                    text: "Необходимо выбрать виджет-тест",
+                    type: "error"
+                });
+
+                return false;
+            } else if (content !== '') {
+                widgetID = $(content).attr('data-id');
+
+                window.Admin.modules.widgets.getWidget(widgetID, function (widget) {
+                    $('#choose_quiz_modal .choose-data').val(JSON.stringify(widget.additional_info));
+                    $('#choose_quiz_modal input[name=quiz]').val(widget.additional_info.title);
+                });
+            }
+
             $('#choose_quiz_modal .save').off('click');
             $('#choose_quiz_modal .save').on('click', function (event) {
                 event.preventDefault();
 
                 let data = JSON.parse($('#choose_quiz_modal .choose-data').val());
 
-                editor.execCommand('mceReplaceContent', false, '' +
-                    '<img class="content-widget" data-type="quiz" id="quiz-'+data.id+'" data-id="'+data.id+'" alt="Виджет-тест: '+data.title+'" style="height: 100px; width: 100%; border: 1px red solid;" />'
-                );
-
-                $('#choose_quiz_modal .choose-data').val('');
-                $('#choose_quiz_modal input[name=quiz]').val('');
-
-                $('#choose_quiz_modal').modal('hide');
+                window.Admin.modules.widgets.saveWidget(widgetID, {
+                    view: 'admin.module.quizzes::front.partials.content.quiz_widget',
+                    params: {
+                        id: data.id
+                    },
+                    additional_info: data
+                }, {
+                    editor: editor,
+                    type: 'quiz',
+                    alt: 'Виджет-тест: '+data.title
+                }, function (widget) {
+                    $('#choose_quiz_modal').modal('hide');
+                });
             });
 
             $('#choose_quiz_modal').modal();

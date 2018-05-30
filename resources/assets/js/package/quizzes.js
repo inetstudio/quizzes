@@ -95,6 +95,13 @@ quizzes.init = function () {
                 }
             }
         });
+
+        $('#choose_quiz_modal').on('hidden.bs.modal', function (e) {
+            let modal = $(this);
+
+            modal.find('.choose-data').val('');
+            modal.find('input[name=quiz]').val('');
+        });
     });
 };
 

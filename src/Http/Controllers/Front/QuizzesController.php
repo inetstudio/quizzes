@@ -83,7 +83,7 @@ class QuizzesController extends Controller implements QuizzesControllerContract
         $email = $request->get('email');
 
         if ($request->has('subscribe-agree')) {
-            $subscriptionService = app()->make('SubscriptionService');
+            $subscriptionService = app()->make('InetStudio\Subscription\Contracts\Services\Front\SubscriptionServiceContract');
             $subscriptionService->subscribeByRequest($request);
         }
 

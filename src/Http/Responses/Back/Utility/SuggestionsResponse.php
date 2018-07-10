@@ -4,7 +4,7 @@ namespace InetStudio\Quizzes\Http\Responses\Back\Utility;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Support\Responsable;
-use InetStudio\Ingredients\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
+use InetStudio\Quizzes\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
 
 /**
  * Class SuggestionsResponse.

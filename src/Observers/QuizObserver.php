@@ -18,7 +18,7 @@ class QuizObserver implements QuizObserverContract
     protected $services;
 
     /**
-     * IngredientObserver constructor.
+     * QuizObserver constructor.
      */
     public function __construct()
     {

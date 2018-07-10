@@ -5,7 +5,7 @@ namespace InetStudio\Quizzes\Http\Controllers\Back;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use InetStudio\Quizzes\Contracts\Http\Controllers\Back\QuizzesUtilityControllerContract;
-use InetStudio\Ingredients\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
+use InetStudio\Quizzes\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
 
 /**
  * Class QuizzesUtilityController.

@@ -8,6 +8,9 @@ use Yajra\DataTables\Services\DataTable;
 use InetStudio\Quizzes\Contracts\Repositories\QuizzesRepositoryContract;
 use InetStudio\Quizzes\Contracts\Services\Back\Quizzes\QuizzesDataTableServiceContract;
 
+/**
+ * Class QuizzesDataTableService.
+ */
 class QuizzesDataTableService extends DataTable implements QuizzesDataTableServiceContract
 {
     /**
@@ -16,7 +19,7 @@ class QuizzesDataTableService extends DataTable implements QuizzesDataTableServi
     private $repository;
 
     /**
-     * IngredientsDataTableService constructor.
+     * QuizzesDataTableService constructor.
      *
      * @param QuizzesRepositoryContract $repository
      */

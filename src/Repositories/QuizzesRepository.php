@@ -150,7 +150,7 @@ class QuizzesRepository implements QuizzesRepositoryContract
      */
     protected function getItemsQuery($extColumns = [], $with = []): Builder
     {
-        $defaultColumns = ['id', 'title'];
+        $defaultColumns = ['id', 'title', 'quiz_type'];
 
         $relations = [
             'media' => function ($query) {

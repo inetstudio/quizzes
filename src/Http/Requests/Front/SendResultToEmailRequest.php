@@ -30,7 +30,7 @@ class SendResultToEmailRequest extends FormRequest implements SendResultToEmailR
     public function messages()
     {
         return [
-            'policy-agree-quiz.required' => 'Обязательно для заполнения',
+            'policy-agree.required' => 'Обязательно для заполнения',
 
             'quiz_id.required' => 'Параметр quiz_id является обязательным',
             'quiz_id.integer' => 'Параметр quiz_id должен быть целым положительным числом',
@@ -58,7 +58,7 @@ class SendResultToEmailRequest extends FormRequest implements SendResultToEmailR
     public function rules(Request $request)
     {
         return [
-            'policy-agree-quiz' => 'required',
+            'policy-agree' => 'required',
             'quiz_id' => 'required|integer|exists:quizzes,id',
             'result_id' => [
                 'required', 'integer',

@@ -6,7 +6,7 @@ window.tinymce.PluginManager.add('quizzes', function (editor) {
             editor.focus();
 
             let content = editor.selection.getContent();
-            let widgetID = '';
+            let quizWidgetID = '';
 
             if (content !== '' && ! /<img class="content-widget".+data-type="quiz".+\/>/g.test(content)) {
                 swal({
@@ -17,9 +17,9 @@ window.tinymce.PluginManager.add('quizzes', function (editor) {
 
                 return false;
             } else if (content !== '') {
-                widgetID = $(content).attr('data-id');
+                quizWidgetID = $(content).attr('data-id');
 
-                window.Admin.modules.widgets.getWidget(widgetID, function (widget) {
+                window.Admin.modules.widgets.getWidget(quizWidgetID, function (widget) {
                     $('#choose_quiz_modal .choose-data').val(JSON.stringify(widget.additional_info));
                     $('#choose_quiz_modal input[name=quiz]').val(widget.additional_info.title);
                 });
@@ -31,7 +31,7 @@ window.tinymce.PluginManager.add('quizzes', function (editor) {
 
                 let data = JSON.parse($('#choose_quiz_modal .choose-data').val());
 
-                window.Admin.modules.widgets.saveWidget(widgetID, {
+                window.Admin.modules.widgets.saveWidget(quizWidgetID, {
                     view: 'admin.module.quizzes::front.partials.content.quiz_widget',
                     params: {
                         id: data.id

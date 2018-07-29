@@ -9,6 +9,9 @@ use Venturecraft\Revisionable\RevisionableTrait;
 use InetStudio\Quizzes\Contracts\Models\AnswerModelContract;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
+/**
+ * Class AnswerModel.
+ */
 class AnswerModel extends Model implements AnswerModelContract, HasMediaConversions
 {
     use HasImages;

@@ -9,6 +9,9 @@ use Venturecraft\Revisionable\RevisionableTrait;
 use InetStudio\Quizzes\Contracts\Models\ResultModelContract;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
+/**
+ * Class ResultModel.
+ */
 class ResultModel extends Model implements ResultModelContract, HasMediaConversions
 {
     use HasImages;
@@ -88,5 +91,18 @@ class ResultModel extends Model implements ResultModelContract, HasMediaConversi
             'result_id',
             'answer_id'
         )->withPivot('association')->withTimestamps();
+    }
+
+    /**
+     * Отношение "один ко многим" с моделью результатов пользователей.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users_results()
+    {
+        return $this->hasMany(
+            app()->make('InetStudio\Quizzes\Contracts\Models\UserResultModelContract'),
+            'result_id', 'id'
+        );
     }
 }

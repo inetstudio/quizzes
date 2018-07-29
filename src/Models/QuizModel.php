@@ -11,6 +11,9 @@ use InetStudio\Quizzes\Contracts\Models\ResultModelContract;
 use InetStudio\Quizzes\Contracts\Models\QuestionModelContract;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
+/**
+ * Class QuizModel.
+ */
 class QuizModel extends Model implements QuizModelContract, HasMediaConversions
 {
     use HasImages;
@@ -93,6 +96,19 @@ class QuizModel extends Model implements QuizModelContract, HasMediaConversions
             app()->make('InetStudio\Quizzes\Contracts\Models\ResultModelContract'),
             'quiz_id',
             'id'
+        );
+    }
+
+    /**
+     * Отношение "один ко многим" с моделью результатов пользователей.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users_results()
+    {
+        return $this->hasMany(
+            app()->make('InetStudio\Quizzes\Contracts\Models\UserResultModelContract'),
+            'quiz_id', 'id'
         );
     }
 }

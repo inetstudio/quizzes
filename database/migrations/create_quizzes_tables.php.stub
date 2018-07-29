@@ -60,6 +60,14 @@ class CreateQuizzesTables extends Migration
             $table->integer('association')->default(0);
             $table->timestamps();
         });
+
+        Schema::create('quizzes_users_results', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('quiz_id');
+            $table->integer('result_id');
+            $table->string('email');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -69,6 +77,7 @@ class CreateQuizzesTables extends Migration
      */
     public function down()
     {
+        Schema::drop('quizzes_users_results');
         Schema::drop('quizzes_results_answers');
         Schema::drop('quizzes_results');
         Schema::drop('quizzes_answers');

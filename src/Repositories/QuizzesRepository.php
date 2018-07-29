@@ -15,7 +15,7 @@ class QuizzesRepository implements QuizzesRepositoryContract
     /**
      * @var QuizModelContract
      */
-    private $model;
+    public $model;
 
     /**
      * QuizzesRepository constructor.
@@ -25,6 +25,28 @@ class QuizzesRepository implements QuizzesRepositoryContract
     public function __construct(QuizModelContract $model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * Получаем модель репозитория.
+     *
+     * @return QuizModelContract
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
+     * Возвращаем пустой объект по id.
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function getEmptyObjectById(int $id)
+    {
+        return $this->model::select(['id'])->where('id', '=', $id)->first();
     }
 
     /**

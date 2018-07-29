@@ -10,6 +10,9 @@ use InetStudio\Quizzes\Contracts\Models\AnswerModelContract;
 use InetStudio\Quizzes\Contracts\Models\QuestionModelContract;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
+/**
+ * Class QuestionModel.
+ */
 class QuestionModel extends Model implements QuestionModelContract, HasMediaConversions
 {
     use HasImages;

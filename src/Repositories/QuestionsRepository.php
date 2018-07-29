@@ -16,7 +16,7 @@ class QuestionsRepository implements QuestionsRepositoryContract
     /**
      * @var QuestionModelContract
      */
-    private $model;
+    public $model;
 
     /**
      * QuestionsRepository constructor.
@@ -26,6 +26,28 @@ class QuestionsRepository implements QuestionsRepositoryContract
     public function __construct(QuestionModelContract $model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * Получаем модель репозитория.
+     *
+     * @return QuestionModelContract
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
+     * Возвращаем пустой объект по id.
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function getEmptyObjectById(int $id)
+    {
+        return $this->model::select(['id'])->where('id', '=', $id)->first();
     }
 
     /**

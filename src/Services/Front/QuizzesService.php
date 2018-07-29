@@ -14,10 +14,18 @@ use InetStudio\Quizzes\Contracts\Services\Front\QuizzesServiceContract;
  */
 class QuizzesService implements QuizzesServiceContract
 {
-    private $quizzesRepository;
-    private $resultsRepository;
-    private $services = [];
-    private $dataManager;
+    /**
+     * Используемые сервисы.
+     *
+     * @var array
+     */
+    public $services = [];
+
+    public $quizzesRepository;
+
+    public $resultsRepository;
+
+    public $dataManager;
 
     /**
      * QuizzesService constructor.
@@ -27,6 +35,7 @@ class QuizzesService implements QuizzesServiceContract
         $this->quizzesRepository = app()->make('InetStudio\Quizzes\Contracts\Repositories\QuizzesRepositoryContract');
         $this->resultsRepository = app()->make('InetStudio\Quizzes\Contracts\Repositories\ResultsRepositoryContract');
 
+        $this->services['usersResults'] = app()->make('InetStudio\Quizzes\Contracts\Services\Front\UsersResultsServiceContract');
         $this->services['images'] = app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract');
 
         $this->dataManager = new Manager();
@@ -232,6 +241,12 @@ class QuizzesService implements QuizzesServiceContract
             'recipient' => $email,
             'data' => $data,
         ]));
+
+        $this->services['usersResults']->save([
+            'quiz_id' => $quizId,
+            'result_id' => $resultId,
+            'email' => $email,
+        ], 0);
 
         return [
             'message' => 'Результат теста отправлен на указанный email',

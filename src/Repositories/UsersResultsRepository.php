@@ -3,27 +3,25 @@
 namespace InetStudio\Quizzes\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;
-use InetStudio\Quizzes\Contracts\Models\AnswerModelContract;
-use InetStudio\Quizzes\Contracts\Models\QuestionModelContract;
-use InetStudio\Quizzes\Contracts\Repositories\AnswersRepositoryContract;
-use InetStudio\Quizzes\Contracts\Http\Requests\Back\SaveQuizRequestContract;
+use InetStudio\Quizzes\Contracts\Models\UserResultModelContract;
+use InetStudio\Quizzes\Contracts\Repositories\UsersResultsRepositoryContract;
 
 /**
- * Class AnswersRepository.
+ * Class UsersResultsRepository.
  */
-class AnswersRepository implements AnswersRepositoryContract
+class UsersResultsRepository implements UsersResultsRepositoryContract
 {
     /**
-     * @var AnswerModelContract
+     * @var UserResultModelContract
      */
     public $model;
 
     /**
-     * AnswersRepository constructor.
+     * ResultsRepository constructor.
      *
-     * @param AnswerModelContract $model
+     * @param UserResultModelContract $model
      */
-    public function __construct(AnswerModelContract $model)
+    public function __construct(UserResultModelContract $model)
     {
         $this->model = $model;
     }
@@ -31,7 +29,7 @@ class AnswersRepository implements AnswersRepositoryContract
     /**
      * Получаем модель репозитория.
      *
-     * @return AnswerModelContract
+     * @return UserResultModelContract
      */
     public function getModel()
     {
@@ -55,9 +53,9 @@ class AnswersRepository implements AnswersRepositoryContract
      *
      * @param $id
      *
-     * @return AnswerModelContract
+     * @return UserResultModelContract
      */
-    public function getItemByID($id): AnswerModelContract
+    public function getItemByID($id): UserResultModelContract
     {
         return $this->model::find($id) ?? new $this->model;
     }
@@ -84,14 +82,33 @@ class AnswersRepository implements AnswersRepositoryContract
     /**
      * Возвращаем объекты, принадлежащие тесту.
      *
-     * @param $questionIDs
+     * @param int $quizID
      * @param bool $returnBuilder
      *
      * @return mixed
      */
-    public function getItemsByQuestionsIDs($questionIDs, bool $returnBuilder = false)
+    public function getItemsByQuiz(int $quizID, bool $returnBuilder = false)
     {
-        $builder = $this->getItemsQuery()->whereIn('quiz_question_id', (array) $questionIDs);
+        $builder = $this->getItemsQuery()->where('quiz_id', $quizID);
+
+        if ($returnBuilder) {
+            return $builder;
+        }
+
+        return $builder->get();
+    }
+
+    /**
+     * Возвращаем объекты, принадлежащие результату.
+     *
+     * @param int $resultID
+     * @param bool $returnBuilder
+     *
+     * @return mixed
+     */
+    public function getItemsByResult(int $resultID, bool $returnBuilder = false)
+    {
+        $builder = $this->getItemsQuery()->where('result_id', $resultID);
 
         if ($returnBuilder) {
             return $builder;
@@ -103,20 +120,15 @@ class AnswersRepository implements AnswersRepositoryContract
     /**
      * Сохраняем объект.
      *
-     * @param SaveQuizRequestContract $request
-     * @param QuestionModelContract $quizQuestion
-     * @param $id
+     * @param array $data
+     * @param int $id
      *
-     * @return AnswerModelContract
+     * @return UserResultModelContract
      */
-    public function save(SaveQuizRequestContract $request, QuestionModelContract $quizQuestion, $id): AnswerModelContract
+    public function save(array $data, int $id): UserResultModelContract
     {
         $item = $this->getItemByID($id);
-
-        $item->setAttribute('quiz_question_id', $quizQuestion->getAttribute('id'));
-        $item->setAttribute('title', trim(strip_tags($request->input('answer.title.'.$id))));
-        $item->setAttribute('description', $request->input('answer.description.'.$id.'.text'));
-        $item->setAttribute('points', (int) trim(strip_tags($request->input('answer.points.'.$id))));
+        $item->fill($data);
         $item->save();
 
         return $item;
@@ -181,11 +193,14 @@ class AnswersRepository implements AnswersRepositoryContract
      */
     protected function getItemsQuery($extColumns = [], $with = []): Builder
     {
-        $defaultColumns = ['id', 'quiz_question_id', 'title'];
+        $defaultColumns = ['id', 'quiz_id', 'result_id', 'email'];
 
         $relations = [
-            'media' => function ($query) {
-                $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk']);
+            'quiz' => function ($query) {
+                $query->select(['id', 'title', 'quiz_type']);
+            },
+            'result' => function ($query) {
+                $query->select(['id', 'title']);
             },
         ];
 

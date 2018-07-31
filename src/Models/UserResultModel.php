@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Quizes;
+namespace InetStudio\Quizzes\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use InetStudio\Quizzes\Contracts\Models\UserResultModelContract;

@@ -66,7 +66,7 @@ class ResultTransformer extends TransformerAbstract implements ResultTransformer
     }
 
     /**
-     * Включаем тест в трасформацию.
+     * Включаем тест в трансформацию.
      *
      * @param ResultModelContract $item
      *

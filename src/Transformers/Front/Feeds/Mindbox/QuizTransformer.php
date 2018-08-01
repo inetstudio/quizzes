@@ -1,11 +1,11 @@
 <?php
 
-namespace InetStudio\Quizzes\Transformers\Front;
+namespace InetStudio\Quizzes\Transformers\Front\Feeds\Mindbox;
 
 use League\Fractal\TransformerAbstract;
 use InetStudio\Quizzes\Contracts\Models\QuizModelContract;
 use League\Fractal\Resource\Collection as FractalCollection;
-use InetStudio\Quizzes\Contracts\Transformers\Front\QuizTransformerContract;
+use InetStudio\Quizzes\Contracts\Transformers\Front\Feeds\Mindbox\QuizTransformerContract;
 
 /**
  * Class QuizTransformer.
@@ -16,7 +16,7 @@ class QuizTransformer extends TransformerAbstract implements QuizTransformerCont
      * @var array
      */
     protected $defaultIncludes = [
-        'questions',
+        'results',
     ];
 
     private $services = [];
@@ -59,8 +59,23 @@ class QuizTransformer extends TransformerAbstract implements QuizTransformerCont
      *
      * @return FractalCollection
      */
-    public function includeQuestions(QuizModelContract $item)
+    public function includeResults(QuizModelContract $item)
     {
-        return new FractalCollection($item->getAttribute('questions'), app()->make('InetStudio\Quizzes\Transformers\Front\QuestionTransformer'));
+        return new FractalCollection(
+            $item->getAttribute('results'),
+            app()->make('InetStudio\Quizzes\Contracts\Transformers\Front\Feeds\Mindbox\ResultTransformerContract')
+        );
+    }
+
+    /**
+     * Обработка коллекции статей.
+     *
+     * @param $items
+     *
+     * @return FractalCollection
+     */
+    public function transformCollection($items): FractalCollection
+    {
+        return new FractalCollection($items, $this);
     }
 }

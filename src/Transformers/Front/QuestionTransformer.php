@@ -51,7 +51,7 @@ class QuestionTransformer extends TransformerAbstract implements QuestionTransfo
     }
 
     /**
-     * Включаем ответы в трасформацию.
+     * Включаем ответы в трансформацию.
      *
      * @param QuestionModelContract $item
      *

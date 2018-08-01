@@ -41,6 +41,6 @@ class MindboxService implements MindboxServiceContract
 
         $transformation = $manager->createData($resource)->toArray();
 
-        return $transformation['data'];
+        return $transformation;
     }
 }

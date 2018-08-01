@@ -32,7 +32,7 @@ class MindboxService implements MindboxServiceContract
     {
         $items = $this->repository->getAllItems();
 
-        $resource = app()->make('InetStudio\Quizzes\Transformers\Front\Feeds\Mindbox\QuizTransformer')
+        $resource = app()->make('InetStudio\Quizzes\Contracts\Transformers\Front\Feeds\Mindbox\QuizTransformerContract')
             ->transformCollection($items);
 
         $manager = new Manager();

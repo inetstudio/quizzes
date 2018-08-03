@@ -2,6 +2,7 @@
 
 namespace InetStudio\Quizzes\Services\Front;
 
+use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Arr;
 use League\Fractal\Manager;
 use Illuminate\Support\Facades\Mail;
@@ -110,16 +111,25 @@ class QuizzesService implements QuizzesServiceContract
                 break;
         }
 
-        if (! $userResult) {
+        if (! $userResult['result']) {
             return [
                 'success' => false,
                 'error' => 'Не удалось определить результат',
             ];
         }
 
-        $resource = new FractalItem($userResult, app()->make('InetStudio\Quizzes\Transformers\Front\ResultTransformer'));
+        $resource = new FractalItem($userResult['result'], app()->make('InetStudio\Quizzes\Transformers\Front\ResultTransformer'));
 
         $data = $this->dataManager->createData($resource)->toArray();
+
+        $hash = Uuid::uuid4()->toString();
+        $this->services['usersResults']->save([
+            'hash' => $hash,
+            'quiz_id' => $quiz->id,
+            'result_id' => $userResult['result']->id,
+            'points' => $userResult['points'],
+        ], 0);
+        session(['quiz_hash' => $hash]);
 
         return [
             'success' => true,
@@ -161,7 +171,10 @@ class QuizzesService implements QuizzesServiceContract
             $userResult = $quiz->results->sortByDesc('max_points')->first();
         }
 
-        return $userResult;
+        return [
+            'result' => $userResult,
+            'points' => $points,
+        ];
     }
 
     /**
@@ -175,21 +188,6 @@ class QuizzesService implements QuizzesServiceContract
     protected function getPersonalResult($quiz, $userAnswers)
     {
         $quizAnswers = [];
-        /*
-        $quizAnswers = $quiz->questions->mapToGroups(function ($question) {
-            return [
-                $question->id => $question->answers->mapToGroups(function ($answer) {
-                    return [
-                        $answer->id => $answer->results->mapToGroups(function ($result) {
-                            return [
-                                $result->id => (int) $result->pivot->association,
-                            ];
-                        }),
-                    ];
-                }),
-            ];
-        })->toArray();
-        */
 
         foreach ($quiz->questions as $question) {
             foreach ($question->answers as $answer) {
@@ -208,9 +206,14 @@ class QuizzesService implements QuizzesServiceContract
 
         arsort($resultsPoints);
         reset($resultsPoints);
-        $resultId = key($resultsPoints);
 
-        return $quiz->results->where('id', (int) $resultId)->first();
+        $resultId = key($resultsPoints);
+        $points = $resultsPoints[$resultId];
+
+        return [
+            'result' => $quiz->results->where('id', (int) $resultId)->first(),
+            'points' => $points,
+        ];
     }
 
     /**
@@ -242,11 +245,10 @@ class QuizzesService implements QuizzesServiceContract
             'data' => $data,
         ]));
 
-        $this->services['usersResults']->save([
-            'quiz_id' => $quizId,
-            'result_id' => $resultId,
+        $hash = session('quiz_hash');
+        $this->services['usersResults']->update([
             'email' => $email,
-        ], 0);
+        ], [['hash', '=', $hash]]);
 
         return [
             'message' => 'Результат теста отправлен на указанный email',

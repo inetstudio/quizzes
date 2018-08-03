@@ -1,6 +1,6 @@
 <?php
 
-namespace InetStudio\Quizzes\Events;
+namespace InetStudio\Quizzes\Events\Back;
 
 use Illuminate\Queue\SerializesModels;
 use InetStudio\Quizzes\Contracts\Models\QuizModelContract;

@@ -63,9 +63,11 @@ class CreateQuizzesTables extends Migration
 
         Schema::create('quizzes_users_results', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('hash')->default('');
             $table->integer('quiz_id');
             $table->integer('result_id');
-            $table->string('email');
+            $table->integer('points')->default(0);
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

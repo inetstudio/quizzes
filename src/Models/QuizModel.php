@@ -3,6 +3,7 @@
 namespace InetStudio\Quizzes\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -17,6 +18,7 @@ use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 class QuizModel extends Model implements QuizModelContract, HasMediaConversions
 {
     use HasImages;
+    use Notifiable;
     use SoftDeletes;
     use RevisionableTrait;
 

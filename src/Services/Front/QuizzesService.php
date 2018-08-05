@@ -240,8 +240,8 @@ class QuizzesService implements QuizzesServiceContract
             'img' => $img,
         ];
 
-        Mail::send(app()->makeWith('InetStudio\Quizzes\Contracts\Mail\ResultMailContract', [
-            'recipient' => $email,
+        $quizObject->notify(app()->makeWith('InetStudio\Quizzes\Notifications\Front\QuizResultNotification', [
+            'email' => $email,
             'data' => $data,
         ]));
 

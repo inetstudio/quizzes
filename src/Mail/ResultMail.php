@@ -6,11 +6,13 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use InetStudio\Quizzes\Contracts\Mail\ResultMailContract;
 
+/**
+ * Class ResultMail.
+ */
 class ResultMail extends Mailable implements ResultMailContract
 {
     use SerializesModels;
 
-    protected $recipient;
     protected $data;
 
     /**
@@ -22,7 +24,6 @@ class ResultMail extends Mailable implements ResultMailContract
     public function __construct(string $recipient, array $data)
     {
         $this->data = $data;
-        $this->recipient = $recipient;
     }
 
     /**
@@ -32,9 +33,8 @@ class ResultMail extends Mailable implements ResultMailContract
      */
     public function build(): self
     {
-        return $this->to($this->recipient)
+        return $this->from(config('mail.from.address'), config('mail.from.name'))
             ->subject('Результаты теста')
-            ->from(config('mail.from.address'), config('mail.from.name'))
             ->view('admin.module.quizzes::mails.result', $this->data);
     }
 }

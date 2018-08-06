@@ -23,7 +23,7 @@ class UserResultModel extends Model implements UserResultModelContract
      * @var array
      */
     protected $fillable = [
-        'quiz_id', 'result_id', 'email',
+        'hash', 'quiz_id', 'result_id', 'points', 'email',
     ];
 
     /**

@@ -18,10 +18,9 @@ class ResultMail extends Mailable implements ResultMailContract
     /**
      * ResultMail constructor.
      *
-     * @param string $recipient
      * @param array $data
      */
-    public function __construct(string $recipient, array $data)
+    public function __construct(array $data)
     {
         $this->data = $data;
     }

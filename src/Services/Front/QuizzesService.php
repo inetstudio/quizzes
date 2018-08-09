@@ -240,7 +240,7 @@ class QuizzesService implements QuizzesServiceContract
             'img' => $img,
         ];
 
-        $quizObject->notify(app()->makeWith('InetStudio\Quizzes\Notifications\Front\QuizResultNotification', [
+        $quizObject->notify(app()->makeWith('InetStudio\Quizzes\Contracts\Notifications\Front\QuizResultNotificationContract', [
             'email' => $email,
             'data' => $data,
         ]));

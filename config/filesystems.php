@@ -9,8 +9,8 @@ return [
 
     'quizzes' => [
         'driver' => 'local',
-        'root' => storage_path('app/public/quizzes/'),
-        'url' => env('APP_URL').'/storage/quizzes/',
+        'root' => storage_path('app/public/quizzes'),
+        'url' => env('APP_URL').'/storage/quizzes',
         'visibility' => 'public',
     ],
 

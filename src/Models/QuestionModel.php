@@ -3,17 +3,17 @@
 namespace InetStudio\Quizzes\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use Venturecraft\Revisionable\RevisionableTrait;
 use InetStudio\Quizzes\Contracts\Models\AnswerModelContract;
 use InetStudio\Quizzes\Contracts\Models\QuestionModelContract;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
 /**
  * Class QuestionModel.
  */
-class QuestionModel extends Model implements QuestionModelContract, HasMediaConversions
+class QuestionModel extends Model implements QuestionModelContract, HasMedia
 {
     use HasImages;
     use SoftDeletes;

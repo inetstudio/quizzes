@@ -4,18 +4,18 @@ namespace InetStudio\Quizzes\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use Venturecraft\Revisionable\RevisionableTrait;
 use InetStudio\Quizzes\Contracts\Models\QuizModelContract;
 use InetStudio\Quizzes\Contracts\Models\ResultModelContract;
 use InetStudio\Quizzes\Contracts\Models\QuestionModelContract;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
 /**
  * Class QuizModel.
  */
-class QuizModel extends Model implements QuizModelContract, HasMediaConversions
+class QuizModel extends Model implements QuizModelContract, HasMedia
 {
     use HasImages;
     use Notifiable;

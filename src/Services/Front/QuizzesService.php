@@ -44,6 +44,16 @@ class QuizzesService implements QuizzesServiceContract
     }
 
     /**
+     * Получаем все объекты.
+     *
+     * @return mixed
+     */
+    public function getAllQuizzes()
+    {
+        return $this->quizzesRepository->getAllItems();
+    }
+
+    /**
      * Получаем информацию по тесту.
      *
      * @param int $id

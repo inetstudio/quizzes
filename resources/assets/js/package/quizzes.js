@@ -6,14 +6,15 @@ quizzes.init = function () {
             $('form.quizz-form').on('click', '.add-'+item, function (event) {
                 event.preventDefault();
 
-                let id = UUID.generate();
+                let id = UUID.generate(),
+                    newEl = '';
 
                 if (item === 'answer') {
                     let parentId = $(this).closest('.panel-group').attr('data-id');
 
-                    var newEl = $($('.templates .'+item).html().replace(new RegExp('template-id', 'g'), id).replace(new RegExp('question-id', 'g'), parentId)).insertBefore(this);
+                    newEl = $($('.templates .'+item).html().replace(new RegExp('template-id', 'g'), id).replace(new RegExp('question-id', 'g'), parentId)).insertBefore(this);
                 } else {
-                    var newEl = $($('.templates .'+item).html().replace(new RegExp('template-id', 'g'), id)).insertBefore(this);
+                    newEl = $($('.templates .'+item).html().replace(new RegExp('template-id', 'g'), id)).insertBefore(this);
                 }
 
                 Holder.run({

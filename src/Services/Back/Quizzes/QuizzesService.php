@@ -3,7 +3,6 @@
 namespace InetStudio\Quizzes\Services\Back\Quizzes;
 
 use League\Fractal\Manager;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use InetStudio\Quizzes\Contracts\Models\QuizModelContract;
 use InetStudio\AdminPanel\Serializers\SimpleDataArraySerializer;
@@ -66,8 +65,6 @@ class QuizzesService implements QuizzesServiceContract
      */
     public function save(SaveQuizRequestContract $request, int $id): QuizModelContract
     {
-        Log::info('Save quiz: '.json_encode($request->all()));
-
         $action = ($id) ? 'отредактирован' : 'создан';
         $item = $this->repository->save($request, $id);
 

@@ -62,6 +62,7 @@ class QuizzesController extends Controller implements QuizzesControllerContract
         $userAnswers = $request->input('answers');
 
         $data = $this->services['quizzes']->getQuizResult($id, $userAnswers);
+        $data['currentUrl'] = $request->input('current_url', '');
 
         return app()->makeWith('InetStudio\Quizzes\Contracts\Http\Responses\Front\GetQuizResultResponseContract', [
             'data' => $data,

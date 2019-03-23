@@ -3,20 +3,20 @@
 namespace InetStudio\Quizzes\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\Uploads\Models\Traits\HasImages;
-use Venturecraft\Revisionable\RevisionableTrait;
 use InetStudio\Quizzes\Contracts\Models\ResultModelContract;
 
 /**
  * Class ResultModel.
  */
-class ResultModel extends Model implements ResultModelContract, HasMedia
+class ResultModel extends Model implements ResultModelContract, HasMedia, Auditable
 {
     use HasImages;
     use SoftDeletes;
-    use RevisionableTrait;
+    use \OwenIt\Auditing\Auditable;
 
     protected $images = [
         'config' => 'quizzes',
@@ -51,7 +51,12 @@ class ResultModel extends Model implements ResultModelContract, HasMedia
         'deleted_at',
     ];
 
-    protected $revisionCreationsEnabled = true;
+    /**
+     * Should the timestamps be audited?
+     *
+     * @var bool
+     */
+    protected $auditTimestamps = true;
 
     /**
      * Загрузка модели.

@@ -3,17 +3,13 @@
 namespace InetStudio\Quizzes\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
  * Class QuizzesBindingsServiceProvider.
  */
-class QuizzesBindingsServiceProvider extends ServiceProvider
+class QuizzesBindingsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-    * @var  bool
-    */
-    protected $defer = true;
-
     /**
     * @var  array
     */

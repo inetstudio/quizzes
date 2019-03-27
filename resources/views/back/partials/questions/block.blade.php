@@ -8,10 +8,10 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#question-{{ $blockId }}" aria-expanded="false" href="#collapseQuestion-{{ $blockId }}">{{ (isset($key)) ? old('question.title.'.$key) : (($item->title) ? $item->title : 'Новый вопрос') }}</a>
-                <a href="#" class="btn btn-danger delete-option pull-right btn-xs" style="color: #fff;"><i class="fa fa-times-circle"></i></a>
+                <a href="#" class="btn btn-danger delete-option float-right btn-xs" style="color: #fff;"><i class="fa fa-times-circle"></i></a>
             </h4>
         </div>
-        <div id="collapseQuestion-{{ $blockId }}" class="panel-collapse collapse" aria-expanded="false">
+        <div id="collapseQuestion-{{ $blockId }}" class="collapse" aria-expanded="false">
             <div class="panel-body">
 
                 {!! Form::hidden('', (isset($key)) ? $key : $dataId, [

@@ -18,7 +18,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <div class="btn-group">
-                            <button data-toggle="dropdown" class="btn btn-sm btn-primary btn-lg dropdown-toggle">Добавить <span class="caret"></span></button>
+                            <button data-toggle="dropdown" class="btn btn-sm btn-primary dropdown-toggle">Добавить</button>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('back.quizzes.create', ['type' => 'trivia']) }}">Trivia</a></li>
                                 <li><a href="{{ route('back.quizzes.create', ['type' => 'personal']) }}">Personal Quiz</a></li>

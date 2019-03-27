@@ -46,7 +46,7 @@ class QuizzesController extends Controller implements QuizzesControllerContract
     }
 
     /**
-     * Добавление объекта.
+     * Создание объекта.
      *
      * @param string $type
      *

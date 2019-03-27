@@ -8,10 +8,10 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#answer-{{ $blockId }}" aria-expanded="false" href="#collapseAnswer-{{ $blockId }}">{{ (isset($key)) ? old('answer.title.'.$key) : (($item->title) ? $item->title : 'Новый ответ') }}</a>
-                <a href="#" class="btn btn-danger delete-option pull-right btn-xs" style="color: #fff;"><i class="fa fa-times-circle"></i></a>
+                <a href="#" class="btn btn-danger delete-option float-right btn-xs" style="color: #fff;"><i class="fa fa-times-circle"></i></a>
             </h4>
         </div>
-        <div id="collapseAnswer-{{ $blockId }}" class="panel-collapse collapse" aria-expanded="false">
+        <div id="collapseAnswer-{{ $blockId }}" class="collapse" aria-expanded="false">
             <div class="panel-body">
 
                 {!! Form::hidden('', (isset($key)) ? $key : $dataId, [
@@ -121,8 +121,8 @@
                 ]) !!}
 
                 @if ($quizType == 'personal')
-                    <div class="form-group answer-results col-xs-12" style="@if (! ((isset($key) && old('answer.association.'.$key)) or ($item && $item->results->count() > 0)))display:none;@endif margin-top: 20px">
-                        <label class="col-sm-2 control-label">Связь с результатом</label>
+                    <div class="form-group row answer-results col-xs-12" style="@if (! ((isset($key) && old('answer.association.'.$key)) or ($item && $item->results->count() > 0)))display:none;@endif margin-top: 20px">
+                        <label class="col-sm-2 col-form-label font-bold">Связь с результатом</label>
                         <div class="col-sm-10">
                             @if (isset($key) && old('answer.association.'.$key))
                                 @foreach (old('answer.association.'.$key) as $resultKey => $val)

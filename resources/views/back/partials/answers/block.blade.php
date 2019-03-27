@@ -74,7 +74,6 @@
                             'title' => 'Количество баллов',
                         ],
                         'field' => [
-                            'class' => 'form-control',
                             'name' => 'answer[points]['.$dataId.']',
                         ],
                     ]) !!}

@@ -41,7 +41,6 @@
                             'title' => 'Минимум баллов',
                         ],
                         'field' => [
-                            'class' => 'form-control',
                             'name' => 'result[min_points]['.$dataId.']',
                         ],
                     ]) !!}
@@ -51,7 +50,6 @@
                             'title' => 'Максимум баллов',
                         ],
                         'field' => [
-                            'class' => 'form-control',
                             'name' => 'result[max_points]['.$dataId.']',
                         ],
                     ]) !!}

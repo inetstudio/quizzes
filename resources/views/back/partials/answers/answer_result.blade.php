@@ -13,7 +13,6 @@
             '2' => 'Полная',
         ], $val, [
             'name' => 'answer[association]['.$answerId.']['.$resultId.']',
-            'class' => 'form-control',
             'data-placeholder' => 'Выберите связь',
             'style' => 'width: 100%',
         ]) !!}

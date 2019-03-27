@@ -6,10 +6,16 @@
 <div class="panel-group col-xs-12" id="result-{{ $blockId }}" data-type="result" data-id="{{ $dataId }}" style="margin: 20px 0 0 0">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#result-{{ $blockId }}" aria-expanded="false" href="#collapseResult-{{ $blockId }}">{{ (isset($key)) ? old('result.title.'.$key) : (($item->title) ? $item->title : 'Новый результат') }}</a>
-                <a href="#" class="btn btn-danger delete-option float-right btn-xs" style="color: #fff;"><i class="fa fa-times-circle"></i></a>
-            </h4>
+            <div class="row">
+                <div class="col-11">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#result-{{ $blockId }}" aria-expanded="false" href="#collapseResult-{{ $blockId }}">{{ (isset($key)) ? old('result.title.'.$key) : (($item->title) ? $item->title : 'Новый результат') }}</a>
+                    </h4>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-danger btn-xs float-right delete-option"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
         </div>
         <div id="collapseResult-{{ $blockId }}" class="collapse" aria-expanded="false">
             <div class="panel-body">

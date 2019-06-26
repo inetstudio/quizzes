@@ -59,7 +59,7 @@
                                                     'title' => 'Тип теста',
                                                 ],
                                                 'field' => [
-                                                    'class' => 'select2 form-control',
+                                                    'class' => 'select2-drop form-control',
                                                     'data-placeholder' => 'Выберите тип',
                                                     'style' => 'width: 100%',
                                                     'readonly' => 'readonly',
@@ -169,7 +169,7 @@
                                                     'title' => 'Тип результата',
                                                 ],
                                                 'field' => [
-                                                    'class' => 'select2 form-control',
+                                                    'class' => 'select2-drop form-control',
                                                     'data-placeholder' => 'Выберите тип',
                                                     'style' => 'width: 100%',
                                                 ],

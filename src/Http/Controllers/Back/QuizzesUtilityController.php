@@ -3,7 +3,7 @@
 namespace InetStudio\Quizzes\Http\Controllers\Back;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
 use InetStudio\Quizzes\Contracts\Http\Controllers\Back\QuizzesUtilityControllerContract;
 use InetStudio\Quizzes\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
 

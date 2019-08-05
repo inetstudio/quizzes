@@ -2,7 +2,7 @@
 
 namespace InetStudio\Quizzes\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
+use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
 use InetStudio\Quizzes\Contracts\Http\Requests\Front\GetQuizDataRequestContract;
 use InetStudio\Quizzes\Contracts\Http\Controllers\Front\QuizzesControllerContract;
 use InetStudio\Quizzes\Contracts\Http\Requests\Front\GetQuizResultRequestContract;

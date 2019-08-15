@@ -8,9 +8,11 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\Uploads\Models\Traits\HasImages;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use InetStudio\Quizzes\Contracts\Models\QuizModelContract;
 use InetStudio\Quizzes\Contracts\Models\ResultModelContract;
 use InetStudio\Quizzes\Contracts\Models\QuestionModelContract;
+use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 
 /**
  * Class QuizModel.
@@ -20,6 +22,7 @@ class QuizModel extends Model implements QuizModelContract, HasMedia, Auditable
     use HasImages;
     use Notifiable;
     use SoftDeletes;
+    use BuildQueryScopeTrait;
     use \OwenIt\Auditing\Auditable;
 
     protected $images = [
@@ -77,6 +80,29 @@ class QuizModel extends Model implements QuizModelContract, HasMedia, Auditable
                 $result->delete();
             });
         });
+
+        self::$buildQueryScopeDefaults['columns'] = [
+            'id', 'title', 'quiz_type', 'description',
+        ];
+
+        self::$buildQueryScopeDefaults['relations'] = [
+
+            'media' => function (MorphMany $mediaQuery) {
+                $mediaQuery->select(
+                    [
+                        'id',
+                        'model_id',
+                        'model_type',
+                        'collection_name',
+                        'file_name',
+                        'disk',
+                        'mime_type',
+                        'custom_properties',
+                        'responsive_images',
+                    ]
+                );
+            },
+        ];
     }
 
     /**

@@ -48,6 +48,7 @@ class QuizzesBindingsServiceProvider extends ServiceProvider implements Deferrab
         'InetStudio\Quizzes\Contracts\Services\Back\Quizzes\QuizzesDataTableServiceContract' => 'InetStudio\Quizzes\Services\Back\Quizzes\QuizzesDataTableService',
         'InetStudio\Quizzes\Contracts\Services\Back\Quizzes\QuizzesServiceContract' => 'InetStudio\Quizzes\Services\Back\Quizzes\QuizzesService',
         'InetStudio\Quizzes\Contracts\Services\Back\Results\ResultsServiceContract' => 'InetStudio\Quizzes\Services\Back\Results\ResultsService',
+        'InetStudio\Quizzes\Contracts\Services\Front\FeedsServiceContract' => 'InetStudio\Quizzes\Services\Front\FeedsService',
         'InetStudio\Quizzes\Contracts\Services\Front\QuizzesServiceContract' => 'InetStudio\Quizzes\Services\Front\QuizzesService',
         'InetStudio\Quizzes\Contracts\Services\Front\UsersResultsServiceContract' => 'InetStudio\Quizzes\Services\Front\UsersResultsService',
         'InetStudio\Quizzes\Contracts\Transformers\Back\QuizTransformerContract' => 'InetStudio\Quizzes\Transformers\Back\QuizTransformer',

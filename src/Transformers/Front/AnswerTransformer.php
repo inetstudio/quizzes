@@ -35,7 +35,7 @@ class AnswerTransformer extends TransformerAbstract implements AnswerTransformer
         return [
             'id' => (int) $item->getAttribute('id'),
             'answer' => $item->getAttribute('title'),
-            'description' => $item->getAttribute('description'),
+            'description' => blade_string($item->getAttribute('description')),
             'points' => (int) $item->getAttribute('points'),
             'img' => [
                 'src' => $this->services['images']->getFirstCropImageUrl($item, 'preview'),

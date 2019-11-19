@@ -55,6 +55,8 @@ class UserResultModel extends Model implements UserResultModelContract
      */
     public static function boot()
     {
+        parent::boot();
+
         self::$buildQueryScopeDefaults['columns'] = [
             'id',
             'hash',

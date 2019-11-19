@@ -65,7 +65,6 @@ class SaveItemRequest extends FormRequest implements SaveItemRequestContract
     public function rules(): array
     {
         return [
-            /*
             'quiz_type' => 'required',
             'title' => 'required|max:255',
             'preview.filename' => 'required',
@@ -109,7 +108,6 @@ class SaveItemRequest extends FormRequest implements SaveItemRequestContract
                 new CropSize(190, 178, 'min', 'Альбомная ориентация'),
             ],
             'answer.points.*' => 'nullable|integer',
-            */
         ];
     }
 }

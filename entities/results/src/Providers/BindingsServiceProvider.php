@@ -14,6 +14,7 @@ class BindingsServiceProvider extends BaseServiceProvider implements DeferrableP
     * @var  array
     */
     public $bindings = [
+        'InetStudio\QuizzesPackage\Results\Contracts\Http\Controllers\Front\ItemsControllerContract' => 'InetStudio\QuizzesPackage\Results\Http\Controllers\Front\ItemsController',
         'InetStudio\QuizzesPackage\Results\Contracts\Http\Requests\Front\SendResultToEmailRequestContract' => 'InetStudio\QuizzesPackage\Results\Http\Requests\Front\SendResultToEmailRequest',
         'InetStudio\QuizzesPackage\Results\Contracts\Http\Responses\Front\SendResultToEmailResponseContract' => 'InetStudio\QuizzesPackage\Results\Http\Responses\Front\SendResultToEmailResponse',
         'InetStudio\QuizzesPackage\Results\Contracts\Mail\Front\ResultMailContract' => 'InetStudio\QuizzesPackage\Results\Mail\Front\ResultMail',

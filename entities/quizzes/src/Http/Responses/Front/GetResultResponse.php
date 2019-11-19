@@ -41,6 +41,6 @@ class GetResultResponse implements GetResultResponseContract
         $data = $this->itemsService->getItemResult($id, $userAnswers);
         $data['currentUrl'] = $request->input('current_url', '');
 
-        return view('admin.module.quizzes-package.quizzes::front.result', $data);
+        return view('admin.module.quizzes-package.results::front.result', $data);
     }
 }

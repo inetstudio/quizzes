@@ -146,7 +146,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
         }
 
         $userResult = $quiz->results->filter(function ($item) use ($points) {
-            return $item->min_points <= $points and $item->max_points >= $points;
+            return $item->min_points <= $points && $item->max_points >= $points;
         })->first();
 
         if (! $userResult) {

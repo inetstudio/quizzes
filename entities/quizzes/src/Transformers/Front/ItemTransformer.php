@@ -68,7 +68,7 @@ class ItemTransformer extends BaseTransformer implements ItemTransformerContract
      */
     public function includeQuestions(QuizModelContract $item): FractalCollection
     {
-        $transformer = $this->getTransformer('InetStudio\QuizzesPackage\Quizzes\Transformers\Front\QuestionTransformer');
+        $transformer = $this->getTransformer('InetStudio\QuizzesPackage\Questions\Transformers\Front\ItemTransformer');
         
         return new FractalCollection($item['questions'], $transformer);
     }

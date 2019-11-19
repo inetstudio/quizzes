@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+/**
+ * Class CreateQuizzesAnswersTables.
+ */
+class CreateQuizzesAnswersTables extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up()
+    {
+        Schema::create('quizzes_answers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->bigInteger('quiz_question_id')->unsigned()->index();
+            $table->text('title')->nullable();;
+            $table->text('description')->nullable();
+            $table->integer('points')->default(0);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down()
+    {
+        Schema::drop('quizzes_answers');
+    }
+}

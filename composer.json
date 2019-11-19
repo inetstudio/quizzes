@@ -15,14 +15,28 @@
     },
     "autoload": {
       "psr-4": {
-        "InetStudio\\Quizzes\\": "src/"
+        "InetStudio\\QuizzesPackage\\": "package/src/",
+        "InetStudio\\QuizzesPackage\\Answers\\": "entities/answers/src/",
+        "InetStudio\\QuizzesPackage\\Questions\\": "entities/questions/src/",
+        "InetStudio\\QuizzesPackage\\Quizzes\\": "entities/quizzes/src/",
+        "InetStudio\\QuizzesPackage\\Results\\": "entities/results/src/",
+        "InetStudio\\QuizzesPackage\\UsersResults\\": "entities/users-results/src/"
       }
     },
     "extra": {
       "laravel": {
         "providers": [
-          "InetStudio\\Quizzes\\Providers\\QuizzesBindingsServiceProvider",
-          "InetStudio\\Quizzes\\Providers\\QuizzesServiceProvider"
+          "InetStudio\\QuizzesPackage\\Providers\\ServiceProvider",
+          "InetStudio\\QuizzesPackage\\Answers\\Providers\\BindingsServiceProvider",
+          "InetStudio\\QuizzesPackage\\Answers\\Providers\\ServiceProvider",
+          "InetStudio\\QuizzesPackage\\Questions\\Providers\\BindingsServiceProvider",
+          "InetStudio\\QuizzesPackage\\Questions\\Providers\\ServiceProvider",
+          "InetStudio\\QuizzesPackage\\Quizzes\\Providers\\BindingsServiceProvider",
+          "InetStudio\\QuizzesPackage\\Quizzes\\Providers\\ServiceProvider",
+          "InetStudio\\QuizzesPackage\\Results\\Providers\\BindingsServiceProvider",
+          "InetStudio\\QuizzesPackage\\Results\\Providers\\ServiceProvider",
+          "InetStudio\\QuizzesPackage\\UsersResults\\Providers\\BindingsServiceProvider",
+          "InetStudio\\QuizzesPackage\\UsersResults\\Providers\\ServiceProvider"
         ]
       }
     }

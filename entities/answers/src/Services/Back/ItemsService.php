@@ -57,6 +57,8 @@ class ItemsService extends BaseService implements ItemsServiceContract
                 continue;
             }
 
+            $data[$id]['quiz_question_id'] = $question['id'];
+
             $itemData = Arr::only($data[$id], $this->model->getFillable());
             $item = $this->saveModel($itemData, $id);
 

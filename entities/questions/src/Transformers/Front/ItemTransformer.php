@@ -33,6 +33,7 @@ class ItemTransformer extends BaseTransformer implements ItemTransformerContract
         return [
             'id' => (int) $item['id'],
             'question' => $item['title'],
+            'description' => $item['description'],
         ];
     }
 

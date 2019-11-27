@@ -58,7 +58,7 @@ class QuestionModel extends Model implements QuestionModelContract
      * @var array
      */
     protected $fillable = [
-        'quiz_id', 'title',
+        'quiz_id', 'title', 'description',
     ];
 
     /**
@@ -89,6 +89,7 @@ class QuestionModel extends Model implements QuestionModelContract
             'id',
             'quiz_id',
             'title',
+            'description',
         ];
 
         self::$buildQueryScopeDefaults['relations'] = [
@@ -122,6 +123,18 @@ class QuestionModel extends Model implements QuestionModelContract
     public function setTitleAttribute($value): void
     {
         $this->attributes['title'] = trim(strip_tags($value));
+    }
+
+    /**
+     * Сеттер атрибута description.
+     *
+     * @param $value
+     */
+    public function setDescriptionAttribute($value): void
+    {
+        $value = (isset($value['text'])) ? $value['text'] : (! is_array($value) ? $value : '');
+
+        $this->attributes['description'] = trim(str_replace('&nbsp;', ' ', $value));
     }
 
     /**

@@ -103,6 +103,35 @@
                     ],
                 ]) !!}
 
+                {!! Form::wysiwyg('', $item->description, [
+                    'label' => [
+                        'title' => 'Описание',
+                    ],
+                    'field' => [
+                        'class' => 'tinymce',
+                        'id' => 'question-'.$blockId.'_description',
+                        'hasImages' => true,
+                        'name' => 'question[description]['.$dataId.']',
+                    ],
+                    'images' => [
+                        'media' => $item->getMedia('description'),
+                        'fields' => [
+                            [
+                                'title' => 'Описание',
+                                'name' => 'description',
+                            ],
+                            [
+                                'title' => 'Copyright',
+                                'name' => 'copyright',
+                            ],
+                            [
+                                'title' => 'Alt',
+                                'name' => 'alt',
+                            ],
+                        ],
+                    ],
+                ]) !!}
+
                 @if (old('answer.keys'))
                     @foreach (old('answer.keys') as $key)
                         @if (old('answer.quiz_question_id.'.$key) == $dataId)

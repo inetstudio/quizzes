@@ -1,4 +1,34 @@
 window.tinymce.PluginManager.add('quizzes', function (editor) {
+    let widgetData = {
+        widget: {
+            events: {
+                widgetSaved: function(model) {
+                    editor.execCommand(
+                        'mceReplaceContent',
+                        false,
+                        '<img class="content-widget" data-type="quiz" data-id="' + model.id + '" alt="Виджет-тест: '+model.additional_info.title+'" />',
+                    );
+                },
+            },
+        },
+    };
+
+    function initQuizzesComponents() {
+        if (typeof window.Admin.vue.modulesComponents.$refs['quizzes-package_QuizWidget'] == 'undefined') {
+            window.Admin.vue.modulesComponents.modules['quizzes-package'].components = _.union(
+                window.Admin.vue.modulesComponents.modules['quizzes-package'].components, [
+                    {
+                        name: 'QuizWidget',
+                        data: widgetData,
+                    },
+                ]);
+        } else {
+            let component = window.Admin.vue.modulesComponents.$refs['quizzes-package_QuizWidget'][0];
+
+            component.$data.model.id = widgetData.model.id;
+        }
+    }
+
     editor.addButton('add_quiz_widget', {
         title: 'Тесты',
         icon: 'menu',
@@ -6,47 +36,27 @@ window.tinymce.PluginManager.add('quizzes', function (editor) {
             editor.focus();
 
             let content = editor.selection.getContent();
-            let quizWidgetID = '';
+            let isQuiz = /<img class="content-widget".+data-type="quiz".+>/g.test(content);
 
-            if (content !== '' && ! /<img class="content-widget".+data-type="quiz".+\/>/g.test(content)) {
+            if (content === '' || isQuiz) {
+                widgetData.model = {
+                    id: parseInt($(content).attr('data-id')) || 0,
+                };
+
+                initQuizzesComponents();
+
+                window.waitForElement('#add_quiz_widget_modal', function() {
+                    $('#add_quiz_widget_modal').modal();
+                });
+            } else {
                 swal({
-                    title: "Ошибка",
-                    text: "Необходимо выбрать виджет-тест",
-                    type: "error"
+                    title: 'Ошибка',
+                    text: 'Необходимо выбрать виджет-тест',
+                    type: 'error',
                 });
 
                 return false;
-            } else if (content !== '') {
-                quizWidgetID = $(content).attr('data-id');
-
-                window.Admin.modules.widgets.getWidget(quizWidgetID, function (widget) {
-                    $('#choose_quiz_modal .choose-data').val(JSON.stringify(widget.additional_info));
-                    $('#choose_quiz_modal input[name=quiz]').val(widget.additional_info.title);
-                });
             }
-
-            $('#choose_quiz_modal .save').off('click');
-            $('#choose_quiz_modal .save').on('click', function (event) {
-                event.preventDefault();
-
-                let data = JSON.parse($('#choose_quiz_modal .choose-data').val());
-
-                window.Admin.modules.widgets.saveWidget(quizWidgetID, {
-                    view: 'admin.module.quizzes-package.quizzes::front.partials.content.quiz_widget',
-                    params: {
-                        id: data.id
-                    },
-                    additional_info: data
-                }, {
-                    editor: editor,
-                    type: 'quiz',
-                    alt: 'Виджет-тест: '+data.title
-                }, function (widget) {
-                    $('#choose_quiz_modal').modal('hide');
-                });
-            });
-
-            $('#choose_quiz_modal').modal();
         }
     })
 });

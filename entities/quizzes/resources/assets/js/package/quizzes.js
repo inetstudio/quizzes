@@ -1,6 +1,15 @@
 let quizzes = {};
 
 quizzes.init = function () {
+    if (!window.Admin.vue.modulesComponents.modules.hasOwnProperty('quizzes-package')) {
+        window.Admin.vue.modulesComponents.modules = Object.assign(
+            {}, window.Admin.vue.modulesComponents.modules, {
+                "quizzes-package": {
+                    components: [],
+                },
+            });
+    }
+
     $(document).ready(function () {
         ['question', 'answer', 'result'].forEach(function(item) {
             $('form.quizz-form').on('click', '.add-'+item, function (event) {
@@ -95,13 +104,6 @@ quizzes.init = function () {
                     $('[data-assoc-result='+id+']').find('.result-title').text(value);
                 }
             }
-        });
-
-        $('#choose_quiz_modal').on('hidden.bs.modal', function (e) {
-            let modal = $(this);
-
-            modal.find('.choose-data').val('');
-            modal.find('input[name=quiz]').val('');
         });
     });
 };

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'namespace' => 'InetStudio\QuizzesPackage\Quizzes\Contracts\Http\Controllers\Front',
+        'namespace' => 'InetStudio\QuizzesPackage\Results\Contracts\Http\Controllers\Front',
         'middleware' => ['web'],
     ],
     function () {

@@ -78,7 +78,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
     {
         $preparedData = [];
 
-        $ids = Arr::pull($data, 'keys');
+        $ids = Arr::pull($data, 'keys', []);
 
         foreach ($ids as $id) {
             $itemData = [];

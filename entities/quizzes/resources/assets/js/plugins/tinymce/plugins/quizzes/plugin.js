@@ -22,11 +22,13 @@ window.tinymce.PluginManager.add('quizzes', function (editor) {
                         data: widgetData,
                     },
                 ]);
-        } else {
-            let component = window.Admin.vue.modulesComponents.$refs['quizzes-package_QuizWidget'][0];
-
-            component.$data.model.id = widgetData.model.id;
         }
+    }
+
+    function loadWidget() {
+        let component = window.Admin.vue.modulesComponents.$refs['quizzes-package_QuizWidget'][0];
+
+        component.$data.model.id = widgetData.model.id;
     }
 
     editor.addButton('add_quiz_widget', {
@@ -46,6 +48,8 @@ window.tinymce.PluginManager.add('quizzes', function (editor) {
                 initQuizzesComponents();
 
                 window.waitForElement('#add_quiz_widget_modal', function() {
+                    loadWidget();
+
                     $('#add_quiz_widget_modal').modal();
                 });
             } else {

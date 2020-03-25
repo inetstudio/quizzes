@@ -92,7 +92,7 @@ class AnswerModel extends Model implements AnswerModelContract
 
         self::$buildQueryScopeDefaults['relations'] = [
             'media' => function ($query) {
-                $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk']);
+                $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk', 'conversions_disk', 'uuid']);
             },
             'question' => function ($query) {
                 $query->select(['id', 'quiz_id', 'title']);

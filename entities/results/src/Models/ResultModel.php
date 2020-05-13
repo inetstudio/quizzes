@@ -9,6 +9,7 @@ use InetStudio\Uploads\Models\Traits\HasImages;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use InetStudio\WidgetsPackage\Widgets\Models\Traits\HasWidgets;
 use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 use InetStudio\QuizzesPackage\Results\Contracts\Models\ResultModelContract;
 
@@ -19,6 +20,7 @@ class ResultModel extends Model implements ResultModelContract
 {
     use Auditable;
     use HasImages;
+    use HasWidgets;
     use SoftDeletes;
     use BuildQueryScopeTrait;
 

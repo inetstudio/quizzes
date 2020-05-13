@@ -13,20 +13,8 @@ window.tinymce.PluginManager.add('quizzes', function (editor) {
         },
     };
 
-    function initQuizzesComponents() {
-        if (typeof window.Admin.vue.modulesComponents.$refs['quizzes-package_QuizWidget'] == 'undefined') {
-            window.Admin.vue.modulesComponents.modules['quizzes-package'].components = _.union(
-                window.Admin.vue.modulesComponents.modules['quizzes-package'].components, [
-                    {
-                        name: 'QuizWidget',
-                        data: widgetData,
-                    },
-                ]);
-        }
-    }
-
     function loadWidget() {
-        let component = window.Admin.vue.modulesComponents.$refs['quizzes-package_QuizWidget'][0];
+        let component = window.Admin.vue.helpers.getVueComponent('quizzes-package', 'QuizWidget');
 
         component.$data.model.id = widgetData.model.id;
     }
@@ -45,7 +33,7 @@ window.tinymce.PluginManager.add('quizzes', function (editor) {
                     id: parseInt($(content).attr('data-id')) || 0,
                 };
 
-                initQuizzesComponents();
+                window.Admin.vue.helpers.initComponent('quizzes-package', 'QuizWidget', widgetData);
 
                 window.waitForElement('#add_quiz_widget_modal', function() {
                     loadWidget();

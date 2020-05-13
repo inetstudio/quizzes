@@ -1,15 +1,6 @@
 let quizzes = {};
 
 quizzes.init = function () {
-    if (!window.Admin.vue.modulesComponents.modules.hasOwnProperty('quizzes-package')) {
-        window.Admin.vue.modulesComponents.modules = Object.assign(
-            {}, window.Admin.vue.modulesComponents.modules, {
-                "quizzes-package": {
-                    components: [],
-                },
-            });
-    }
-
     $(document).ready(function () {
         ['question', 'answer', 'result'].forEach(function(item) {
             $('form.quizz-form').on('click', '.add-'+item, function (event) {

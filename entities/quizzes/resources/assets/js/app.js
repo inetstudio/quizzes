@@ -1,6 +1,6 @@
 require('./plugins/tinymce/plugins/quizzes');
 
-require('../../../../../../widgets/resources/assets/js/mixins/widget');
+require('../../../../../../widgets/entities/widgets/resources/assets/js/mixins/widget');
 
 require('./stores/quizzes-package');
 

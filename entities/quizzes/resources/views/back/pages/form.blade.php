@@ -237,14 +237,14 @@
     <div class="templates" style="display: none">
         <div class="question">
             @include('admin.module.quizzes-package.questions::back.partials.block', [
-                'item' => app()->make('InetStudio\QuizzesPackage\Questions\Contracts\Models\QuestionModelContract'),
+                'item' => resolve('InetStudio\QuizzesPackage\Questions\Contracts\Models\QuestionModelContract'),
                 'key' => null,
                 'quizType' => $quizType,
             ])
         </div>
         <div class="answer">
             @include('admin.module.quizzes-package.answers::back.partials.block', [
-                'item' => app()->make('InetStudio\QuizzesPackage\Answers\Contracts\Models\AnswerModelContract'),
+                'item' => resolve('InetStudio\QuizzesPackage\Answers\Contracts\Models\AnswerModelContract'),
                 'key' => null,
                 'quizType' => $quizType,
                 'quizItem' => $item,
@@ -252,7 +252,7 @@
         </div>
         <div class="result">
             @include('admin.module.quizzes-package.results::back.partials.block', [
-                'item' => app()->make('InetStudio\QuizzesPackage\Results\Contracts\Models\ResultModelContract'),
+                'item' => resolve('InetStudio\QuizzesPackage\Results\Contracts\Models\ResultModelContract'),
                 'key' => null,
                 'quizType' => $quizType,
             ])
@@ -261,7 +261,7 @@
         @if ($quizType == 'personal')
             <div class="answer_results">
                 @include('admin.module.quizzes-package.answers::back.partials.answer_result', [
-                    'item' => app()->make('InetStudio\QuizzesPackage\Answers\Contracts\Models\AnswerModelContract'),
+                    'item' => resolve('InetStudio\QuizzesPackage\Answers\Contracts\Models\AnswerModelContract'),
                     'resultAssoc' => null,
                 ])
             </div>

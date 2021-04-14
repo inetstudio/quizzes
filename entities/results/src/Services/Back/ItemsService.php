@@ -3,36 +3,18 @@
 namespace InetStudio\QuizzesPackage\Results\Services\Back;
 
 use Illuminate\Support\Arr;
+use Illuminate\Database\QueryException;
 use InetStudio\AdminPanel\Base\Services\BaseService;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\QuizzesPackage\Results\Contracts\Models\ResultModelContract;
 use InetStudio\QuizzesPackage\Results\Contracts\Services\Back\ItemsServiceContract;
 
-/**
- * Class ItemsService.
- */
 class ItemsService extends BaseService implements ItemsServiceContract
 {
-    /**
-     * ItemsService constructor.
-     *
-     * @param  ResultModelContract  $model
-     */
     public function __construct(ResultModelContract $model)
     {
         parent::__construct($model);
     }
 
-    /**
-     * Сохраняем объекты.
-     *
-     * @param  array  $data
-     * @param  int  $quizId
-     *
-     * @return array
-     *
-     * @throws BindingResolutionException
-     */
     public function save(array $data, int $quizId): array
     {
         $data = $this->prepareData($data, $quizId);
@@ -46,10 +28,20 @@ class ItemsService extends BaseService implements ItemsServiceContract
         );
 
         $results = [];
-
         foreach ($ids as $id) {
             $itemData = Arr::only($data[$id], $this->model->getFillable());
             $item = $this->saveModel($itemData, $id);
+
+            $tagsData = Arr::only($data[$id], 'tags');
+            if (isset($tagsData['tags'])) {
+                if (! $tagsData['tags']) {
+                    $item->tags()->detach($item->tags()->pluck('id')->toArray());
+                } else {
+                    $item->tags()->sync($tagsData);
+                }
+            } else {
+                $item->tags()->detach($item->tags()->pluck('id')->toArray());
+            }
 
             $images = collect(config('quizzes.images.conversions.result'))->mapWithKeys(
                     function ($item, $key) use ($id) {
@@ -57,7 +49,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
                     }
                 )->toArray();
 
-            app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract')
+            resolve('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract')
                 ->attachToObject(request(), $item, $images, 'quizzes', 'result');
 
             $results[$id] = $item;
@@ -66,14 +58,6 @@ class ItemsService extends BaseService implements ItemsServiceContract
         return $results;
     }
 
-    /**
-     * Prepare items data.
-     *
-     * @param  array  $data
-     * @param  int  $quizId
-     *
-     * @return array
-     */
     protected function prepareData(array $data, int $quizId): array
     {
         $preparedData = [];

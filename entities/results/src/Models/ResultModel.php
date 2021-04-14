@@ -6,16 +6,13 @@ use OwenIt\Auditing\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\Uploads\Models\Traits\HasImages;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\WidgetsPackage\Widgets\Models\Traits\HasWidgets;
 use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 use InetStudio\QuizzesPackage\Results\Contracts\Models\ResultModelContract;
 
-/**
- * Class ResultModel.
- */
 class ResultModel extends Model implements ResultModelContract
 {
     use Auditable;
@@ -24,40 +21,17 @@ class ResultModel extends Model implements ResultModelContract
     use SoftDeletes;
     use BuildQueryScopeTrait;
 
-    /**
-     * Тип сущности.
-     */
     const ENTITY_TYPE = 'quizzes_result';
 
-    /**
-     * Should the timestamps be audited?
-     *
-     * @var bool
-     */
-    protected $auditTimestamps = true;
+    protected bool $auditTimestamps = true;
 
-    /**
-     * Настройки для генерации изображений.
-     *
-     * @var array
-     */
     protected $images = [
         'config' => 'quizzes',
         'model' => 'result',
     ];
 
-    /**
-     * Связанная с моделью таблица.
-     *
-     * @var string
-     */
     protected $table = 'quizzes_results';
 
-    /**
-     * Атрибуты, для которых разрешено массовое назначение.
-     *
-     * @var array
-     */
     protected $fillable = [
         'quiz_id',
         'min_points',
@@ -67,20 +41,12 @@ class ResultModel extends Model implements ResultModelContract
         'full_description',
     ];
 
-    /**
-     * Атрибуты, которые должны быть преобразованы в даты.
-     *
-     * @var array
-     */
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    /**
-     * Загрузка модели.
-     */
     public static function boot()
     {
         parent::boot();
@@ -176,26 +142,14 @@ class ResultModel extends Model implements ResultModelContract
         $this->attributes['full_description'] = trim(str_replace('&nbsp;', ' ', $value));
     }
 
-    /**
-     * Геттер атрибута type.
-     *
-     * @return string
-     */
     public function getTypeAttribute(): string
     {
         return self::ENTITY_TYPE;
     }
 
-    /**
-     * Обратное отношение "один ко многим" с моделью теста.
-     *
-     * @return BelongsTo
-     *
-     * @throws BindingResolutionException
-     */
     public function quiz(): BelongsTo
     {
-        $quizModel = app()->make('InetStudio\QuizzesPackage\Quizzes\Contracts\Models\QuizModelContract');
+        $quizModel = resolve('InetStudio\QuizzesPackage\Quizzes\Contracts\Models\QuizModelContract');
 
         return $this->belongsTo(
             get_class($quizModel),
@@ -203,37 +157,40 @@ class ResultModel extends Model implements ResultModelContract
         );
     }
 
-    /**
-     * Отношение "многие ко многим" с моделью ответа.
-     *
-     * @return BelongsToMany
-     *
-     * @throws BindingResolutionException
-     */
     public function answers(): BelongsToMany
     {
-        $answerModel = app()->make('InetStudio\QuizzesPackage\Answers\Contracts\Models\AnswerModelContract');
+        $answerModel = resolve('InetStudio\QuizzesPackage\Answers\Contracts\Models\AnswerModelContract');
 
         return $this->belongsToMany(
-            get_class($answerModel),
-            'quizzes_results_answers',
-            'result_id',
-            'answer_id'
-        )
+                get_class($answerModel),
+                'quizzes_results_answers',
+                'result_id',
+                'answer_id'
+            )
             ->withPivot('association')
             ->withTimestamps();
     }
 
-    /**
-     * Отношение "один ко многим" с моделью результатов пользователей.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function users_results()
+    public function users_results(): HasMany
     {
+        $userResultModel = resolve('InetStudio\QuizzesPackage\Results\Contracts\Models\UserResultModelContract');
+
         return $this->hasMany(
-            app()->make('InetStudio\QuizzesPackage\Results\Contracts\Models\UserResultModelContract'),
-            'result_id', 'id'
+            get_class($userResultModel),
+            'result_id',
+            'id'
         );
+    }
+
+    public function tags(): BelongsToMany
+    {
+        $tagModel = resolve('InetStudio\QuizzesPackage\Tags\Contracts\Models\TagModelContract');
+
+        return $this->belongsToMany(
+            get_class($tagModel),
+            'quizzes_results_tags',
+            'result_id',
+            'tag_id'
+        )->withTimestamps();
     }
 }

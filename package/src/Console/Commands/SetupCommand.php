@@ -4,28 +4,12 @@ namespace InetStudio\QuizzesPackage\Console\Commands;
 
 use InetStudio\AdminPanel\Base\Console\Commands\BaseSetupCommand;
 
-/**
- * Class SetupCommand.
- */
 class SetupCommand extends BaseSetupCommand
 {
-    /**
-     * Имя команды.
-     *
-     * @var string
-     */
     protected $name = 'inetstudio:quizzes-package:setup';
 
-    /**
-     * Описание команды.
-     *
-     * @var string
-     */
     protected $description = 'Setup quizzes package';
 
-    /**
-     * Инициализация команд.
-     */
     protected function initCommands(): void
     {
         $this->calls = [
@@ -51,9 +35,14 @@ class SetupCommand extends BaseSetupCommand
             ],
             [
                 'type' => 'artisan',
+                'description' => 'Quizzes results tags setup',
+                'command' => 'inetstudio:quizzes-package:tags:setup',
+            ],
+            [
+                'type' => 'artisan',
                 'description' => 'Quizzes users results setup',
                 'command' => 'inetstudio:quizzes-package:users-results:setup',
-            ],            
+            ],
         ];
     }
 }

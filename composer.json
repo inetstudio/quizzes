@@ -20,6 +20,7 @@
         "InetStudio\\QuizzesPackage\\Questions\\": "entities/questions/src/",
         "InetStudio\\QuizzesPackage\\Quizzes\\": "entities/quizzes/src/",
         "InetStudio\\QuizzesPackage\\Results\\": "entities/results/src/",
+        "InetStudio\\QuizzesPackage\\Tags\\": "entities/tags/src/",
         "InetStudio\\QuizzesPackage\\UsersResults\\": "entities/users-results/src/"
       }
     },
@@ -35,6 +36,8 @@
           "InetStudio\\QuizzesPackage\\Quizzes\\Providers\\ServiceProvider",
           "InetStudio\\QuizzesPackage\\Results\\Providers\\BindingsServiceProvider",
           "InetStudio\\QuizzesPackage\\Results\\Providers\\ServiceProvider",
+          "InetStudio\\QuizzesPackage\\Tags\\Providers\\BindingsServiceProvider",
+          "InetStudio\\QuizzesPackage\\Tags\\Providers\\ServiceProvider",
           "InetStudio\\QuizzesPackage\\UsersResults\\Providers\\BindingsServiceProvider",
           "InetStudio\\QuizzesPackage\\UsersResults\\Providers\\ServiceProvider"
         ]

@@ -37,6 +37,57 @@ quizzes.init = function () {
                         });
                     }
 
+                    $(newEl).find('select').each(function () {
+                        let $this = $(this);
+                        if ($this.attr('data-source')) {
+                            let url = $this.attr('data-source'),
+                                exclude = (typeof $this.attr('data-exclude') !== 'undefined') ? $this.attr('data-exclude').split('|') : [];
+
+                            let options = {};
+
+                            if ($this.attr('data-create') === '1') {
+                                options.tags = true;
+                            }
+
+                            if ($this.parents('.modal').length > 0) {
+                                options.dropdownParent = $this.parents('.modal').first();
+                            }
+
+                            $(this).select2($.extend({
+                                language: "ru",
+                                ajax: {
+                                    url: url,
+                                    method: 'POST',
+                                    dataType: 'json',
+                                    delay: 250,
+                                    data: function (params) {
+                                        return {
+                                            q: params.term,
+                                            exclude: exclude
+                                        };
+                                    },
+                                    processResults: function (data) {
+                                        return {
+                                            results: $.map(data.items, function (item) {
+                                                return {
+                                                    text: item.name,
+                                                    id: item.id,
+                                                    extra: _.get(item, 'extra', [])
+                                                }
+                                            })
+                                        };
+                                    },
+                                    cache: true
+                                },
+                                minimumInputLength: 1
+                            }, options));
+                        } else {
+                            $(this).select2({
+                                language: "ru"
+                            });
+                        }
+                    });
+
                     $('.answer-results').show();
                 } else if (item === 'answer') {
                     $('.answer-results').show();

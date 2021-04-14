@@ -8,30 +8,14 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 use InetStudio\QuizzesPackage\UsersResults\Contracts\Models\UserResultModelContract;
 
-/**
- * Class UserResultModel.
- */
 class UserResultModel extends Model implements UserResultModelContract
 {
     use BuildQueryScopeTrait;
 
-    /**
-     * Тип сущности.
-     */
     const ENTITY_TYPE = 'quizzes_user_result';
 
-    /**
-     * Связанная с моделью таблица.
-     *
-     * @var string
-     */
     protected $table = 'quizzes_users_results';
 
-    /**
-     * Атрибуты, для которых разрешено массовое назначение.
-     *
-     * @var array
-     */
     protected $fillable = [
         'hash',
         'quiz_id',
@@ -40,19 +24,11 @@ class UserResultModel extends Model implements UserResultModelContract
         'email',
     ];
 
-    /**
-     * Атрибуты, которые должны быть преобразованы в даты.
-     *
-     * @var array
-     */
     protected $dates = [
         'created_at',
         'updated_at',
     ];
 
-    /**
-     * Загрузка модели.
-     */
     public static function boot()
     {
         parent::boot();
@@ -84,11 +60,6 @@ class UserResultModel extends Model implements UserResultModelContract
         ];
     }
 
-    /**
-     * Сеттер атрибута hash.
-     *
-     * @param $value
-     */
     public function setHashAttribute($value): void
     {
         $this->attributes['hash'] = trim(strip_tags($value));

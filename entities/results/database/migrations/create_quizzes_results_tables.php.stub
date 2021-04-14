@@ -4,14 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-/**
- * Class CreateQuizzesResultsTables.
- */
 class CreateQuizzesResultsTables extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
         Schema::create('quizzes_results', function (Blueprint $table) {
@@ -35,9 +29,6 @@ class CreateQuizzesResultsTables extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down()
     {
         Schema::drop('quizzes_results_answers');

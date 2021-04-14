@@ -1,3 +1,5 @@
+@inject('tagsService', 'InetStudio\QuizzesPackage\Tags\Contracts\Services\Back\ItemsServiceContract')
+
 @php
     $blockId = (isset($key)) ? str_replace('new_', '', $key) : (($item->id) ? $item->id : 'template-id');
     $dataId = (isset($key)) ? $key : (($item->id) ? $item->id : 'new_template-id');
@@ -156,6 +158,21 @@
                             'name' => 'alt',
                             'value' => isset($previewImageMedia) ? $previewImageMedia->getCustomProperty('alt') : '',
                         ],
+                    ],
+                ]) !!}
+
+                {!! Form::dropdown('result[tags]['.$dataId.']', (isset($key)) ? old('result.tags.'.$key) : $item->tags()->pluck('id')->toArray(), [
+                    'label' => [
+                        'title' => 'Теги',
+                    ],
+                    'field' => [
+                        'class' => ((isset($key)) ? $key : (($item->id) ? 'select2-drop form-control' : 'form-control')),
+                        'data-placeholder' => 'Выберите теги',
+                        'style' => 'width: 100%',
+                        'data-source' => route('back.quizzes-package.tags.getSuggestionsChildren'),
+                    ],
+                    'options' => [
+                        'values' => (isset($key)) ? $tagsService->getItemById(old('result.tags.'.$key))->pluck('name', 'id')->toArray() : $item->tags()->pluck('name', 'id')->toArray(),
                     ],
                 ]) !!}
 

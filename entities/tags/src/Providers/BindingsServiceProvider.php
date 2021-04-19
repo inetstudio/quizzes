@@ -22,6 +22,7 @@ class BindingsServiceProvider extends BaseServiceProvider implements DeferrableP
         'InetStudio\QuizzesPackage\Tags\Contracts\Http\Requests\Back\Resource\ShowRequestContract' => 'InetStudio\QuizzesPackage\Tags\Http\Requests\Back\Resource\ShowRequest',
         'InetStudio\QuizzesPackage\Tags\Contracts\Http\Requests\Back\Resource\StoreRequestContract' => 'InetStudio\QuizzesPackage\Tags\Http\Requests\Back\Resource\StoreRequest',
         'InetStudio\QuizzesPackage\Tags\Contracts\Http\Requests\Back\Resource\UpdateRequestContract' => 'InetStudio\QuizzesPackage\Tags\Http\Requests\Back\Resource\UpdateRequest',
+        'InetStudio\QuizzesPackage\Tags\Contracts\Http\Requests\Back\Utility\GetAliasRequestContract' => 'InetStudio\QuizzesPackage\Tags\Http\Requests\Back\Utility\GetAliasRequest',
         'InetStudio\QuizzesPackage\Tags\Contracts\Http\Requests\Back\Utility\GetSuggestionsChildrenRequestContract' => 'InetStudio\QuizzesPackage\Tags\Http\Requests\Back\Utility\GetSuggestionsChildrenRequest',
         'InetStudio\QuizzesPackage\Tags\Contracts\Http\Requests\Back\Utility\GetSuggestionsRequestContract' => 'InetStudio\QuizzesPackage\Tags\Http\Requests\Back\Utility\GetSuggestionsRequest',
 
@@ -39,6 +40,7 @@ class BindingsServiceProvider extends BaseServiceProvider implements DeferrableP
         'InetStudio\QuizzesPackage\Tags\Contracts\Http\Responses\Back\Resource\ShowResponseContract' => 'InetStudio\QuizzesPackage\Tags\Http\Responses\Back\Resource\ShowResponse',
         'InetStudio\QuizzesPackage\Tags\Contracts\Http\Responses\Back\Resource\StoreResponseContract' => 'InetStudio\QuizzesPackage\Tags\Http\Responses\Back\Resource\StoreResponse',
         'InetStudio\QuizzesPackage\Tags\Contracts\Http\Responses\Back\Resource\UpdateResponseContract' => 'InetStudio\QuizzesPackage\Tags\Http\Responses\Back\Resource\UpdateResponse',
+        'InetStudio\QuizzesPackage\Tags\Contracts\Http\Responses\Back\Utility\GetAliasResponseContract' => 'InetStudio\QuizzesPackage\Tags\Http\Responses\Back\Utility\GetAliasResponse',
         'InetStudio\QuizzesPackage\Tags\Contracts\Http\Responses\Back\Utility\GetSuggestionsChildrenResponseContract' => 'InetStudio\QuizzesPackage\Tags\Http\Responses\Back\Utility\GetSuggestionsChildrenResponse',
         'InetStudio\QuizzesPackage\Tags\Contracts\Http\Responses\Back\Utility\GetSuggestionsResponseContract' => 'InetStudio\QuizzesPackage\Tags\Http\Responses\Back\Utility\GetSuggestionsResponse',
 

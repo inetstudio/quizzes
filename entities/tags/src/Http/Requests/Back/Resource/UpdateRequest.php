@@ -17,6 +17,9 @@ class UpdateRequest extends FormRequest implements UpdateRequestContract
         return [
             'name.required' => 'Поле «Название» обязательно для заполнения',
             'name.max' => 'Поле «Название» не должно превышать 255 символов',
+            'alias.required' => 'Поле «Алиас» обязательно для заполнения',
+            'alias.max' => 'Поле «Алиас» не должно превышать 255 символов',
+            'alias.unique' => 'Такое значение поля «Алиас» уже существует',
         ];
     }
 
@@ -24,6 +27,7 @@ class UpdateRequest extends FormRequest implements UpdateRequestContract
     {
         return [
             'name' => 'required|max:255',
+            'alias' => 'required|max:255|unique:quizzes_tags,alias,'.$this->input('id'),
         ];
     }
 }

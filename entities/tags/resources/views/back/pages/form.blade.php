@@ -55,6 +55,22 @@
                                             'label' => [
                                                 'title' => 'Название',
                                             ],
+                                           'field' => [
+                                                'class' => 'form-control slugify',
+                                                'data-slug-url' => route('back.quizzes-package.tags.getAlias'),
+                                                'data-slug-target' => 'alias',
+                                            ],
+                                        ]) !!}
+
+                                        {!! Form::string('alias', $item->alias, [
+                                            'label' => [
+                                                'title' => 'Алиас',
+                                            ],
+                                            'field' => [
+                                                'class' => 'form-control slugify',
+                                                'data-slug-url' => route('back.quizzes-package.tags.getAlias'),
+                                                'data-slug-target' => 'alias',
+                                            ],
                                         ]) !!}
 
                                         {!! Form::quizzes_tags('', $item, [

@@ -7,6 +7,8 @@ use InetStudio\QuizzesPackage\Tags\Contracts\Services\ItemsServiceContract as Ba
 
 interface UtilityServiceContract extends BaseItemsServiceContract
 {
+    public function getAlias(string $text): string;
+
     public function getSuggestions(string $search, array $exclude): Collection;
 
     public function getSuggestionsChildren(string $search): Collection;

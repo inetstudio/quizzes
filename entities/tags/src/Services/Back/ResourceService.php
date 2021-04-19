@@ -55,6 +55,7 @@ class ResourceService extends BaseItemsService implements ResourceServiceContrac
     {
         $item->parent_id = $data->parentId;
         $item->name = $data->name;
+        $item->alias = $data->alias;
 
         $item->save();
 

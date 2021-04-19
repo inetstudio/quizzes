@@ -4,6 +4,8 @@ namespace InetStudio\QuizzesPackage\Tags\Http\Controllers\Back;
 
 use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
 use InetStudio\QuizzesPackage\Tags\Contracts\Http\Controllers\Back\UtilityControllerContract;
+use InetStudio\QuizzesPackage\Tags\Contracts\Http\Requests\Back\Utility\GetAliasRequestContract;
+use InetStudio\QuizzesPackage\Tags\Contracts\Http\Responses\Back\Utility\GetAliasResponseContract;
 use InetStudio\QuizzesPackage\Tags\Contracts\Http\Requests\Back\Utility\GetSuggestionsRequestContract;
 use InetStudio\QuizzesPackage\Tags\Contracts\Http\Responses\Back\Utility\GetSuggestionsResponseContract;
 use InetStudio\QuizzesPackage\Tags\Contracts\Http\Requests\Back\Utility\GetSuggestionsChildrenRequestContract;
@@ -11,6 +13,11 @@ use InetStudio\QuizzesPackage\Tags\Contracts\Http\Responses\Back\Utility\GetSugg
 
 class UtilityController extends Controller implements UtilityControllerContract
 {
+    public function getAlias(GetAliasRequestContract $request, GetAliasResponseContract $response): GetAliasResponseContract
+    {
+        return $response;
+    }
+
     public function getSuggestions(GetSuggestionsRequestContract $request, GetSuggestionsResponseContract $response): GetSuggestionsResponseContract
     {
         return $response;

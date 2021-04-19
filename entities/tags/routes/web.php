@@ -15,6 +15,9 @@ Route::group(
         Route::post('tags/suggestions', 'UtilityControllerContract@getSuggestions')
             ->name('back.quizzes-package.tags.getSuggestions');
 
+        Route::post('tags/alias', 'UtilityControllerContract@getAlias')
+            ->name('back.quizzes-package.tags.getAlias');
+
         Route::post('tags/suggestions-children', 'UtilityControllerContract@getSuggestionsChildren')
             ->name('back.quizzes-package.tags.getSuggestionsChildren');
 

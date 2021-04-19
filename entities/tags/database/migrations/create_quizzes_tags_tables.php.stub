@@ -17,8 +17,8 @@ class CreateQuizzesTagsTables extends Migration
         });
 
         Schema::create('quizzes_results_tags', function (Blueprint $table) {
-            $table->integer('result_id')->unsigned()->index;
-            $table->uuid('tag_id')->index;
+            $table->integer('result_id')->unsigned()->index();
+            $table->uuid('tag_id')->index();
             $table->timestamps();
         });
     }

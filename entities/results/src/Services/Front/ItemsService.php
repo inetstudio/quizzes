@@ -11,22 +11,10 @@ use InetStudio\QuizzesPackage\Results\Contracts\Models\ResultModelContract;
 use InetStudio\QuizzesPackage\Results\Contracts\Services\Front\ItemsServiceContract;
 use InetStudio\AdminPanel\Base\Contracts\Serializers\SimpleDataArraySerializerContract;
 
-/**
- * Class ItemsService.
- */
 class ItemsService extends BaseService implements ItemsServiceContract
 {
-    /**
-     * @var Manager
-     */
-    protected $dataManager;
+    protected Manager $dataManager;
 
-    /**
-     * ItemsService constructor.
-     *
-     * @param  ResultModelContract  $model
-     * @param  SimpleDataArraySerializerContract  $serializer
-     */
     public function __construct(ResultModelContract $model, SimpleDataArraySerializerContract $serializer)
     {
         parent::__construct($model);
@@ -35,22 +23,13 @@ class ItemsService extends BaseService implements ItemsServiceContract
         $this->dataManager->setSerializer($serializer);
     }
 
-    /**
-     * Получаем информацию по результату.
-     *
-     * @param  int  $id
-     *
-     * @return array
-     *
-     * @throws BindingResolutionException
-     */
     public function getItemData(int $id = 0): array
     {
         $item = $this->getItemById($id);
 
         $resource = new FractalItem(
             $item,
-            app()->make('InetStudio\QuizzesPackage\Results\Transformers\Front\ItemTransformer')
+            resolve('InetStudio\QuizzesPackage\Results\Contracts\Transformers\Front\ItemTransformerContract')
         );
 
         $data = $this->dataManager->createData($resource)->toArray();
@@ -61,26 +40,15 @@ class ItemsService extends BaseService implements ItemsServiceContract
         ];
     }
 
-    /**
-     * Отправляем результат теста на почту.
-     *
-     * @param int $resultId
-     * @param string $url
-     * @param string $email
-     *
-     * @return array
-     *
-     * @throws BindingResolutionException
-     */
     public function sendResultToEmail(int $resultId, string $url, string $email): array
     {
-        $usersResultsService = app()->make('InetStudio\QuizzesPackage\UsersResults\Services\Front\ItemsService');
+        $usersResultsService = resolve('InetStudio\QuizzesPackage\UsersResults\Contracts\Services\Front\ItemsServiceContract');
 
         $result = $this->getItemById($resultId);
 
         $resource = new FractalItem(
             $result,
-            app()->make('InetStudio\QuizzesPackage\Results\Transformers\Front\ItemTransformer')
+            resolve('InetStudio\QuizzesPackage\Results\Contracts\Transformers\Front\ItemTransformerContract')
         );
         $data = $this->dataManager->createData($resource)->toArray();
 
@@ -89,7 +57,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
             'url' => $url,
         ];
 
-        $notification = app()->make(
+        $notification = resolve(
             'InetStudio\QuizzesPackage\Results\Contracts\Notifications\Front\ResultNotificationContract',
             compact('data')
         );

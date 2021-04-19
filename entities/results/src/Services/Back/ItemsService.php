@@ -37,7 +37,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
                 if (! $tagsData['tags']) {
                     $item->tags()->detach($item->tags()->pluck('id')->toArray());
                 } else {
-                    $item->tags()->sync($tagsData);
+                    $item->tags()->sync($tagsData['tags']);
                 }
             } else {
                 $item->tags()->detach($item->tags()->pluck('id')->toArray());

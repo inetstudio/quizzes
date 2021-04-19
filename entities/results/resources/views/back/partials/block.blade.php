@@ -161,7 +161,7 @@
                     ],
                 ]) !!}
 
-                {!! Form::dropdown('result[tags]['.$dataId.']', (isset($key)) ? old('result.tags.'.$key) : $item->tags()->pluck('id')->toArray(), [
+                {!! Form::dropdown('result[tags]['.$dataId.'][]', (isset($key)) ? old('result.tags.'.$key) : $item->tags()->pluck('id')->toArray(), [
                     'label' => [
                         'title' => 'Теги',
                     ],
@@ -169,6 +169,7 @@
                         'class' => ((isset($key)) ? $key : (($item->id) ? 'select2-drop form-control' : 'form-control')),
                         'data-placeholder' => 'Выберите теги',
                         'style' => 'width: 100%',
+                        'multiple' => 'multiple',
                         'data-source' => route('back.quizzes-package.tags.getSuggestionsChildren'),
                     ],
                     'options' => [

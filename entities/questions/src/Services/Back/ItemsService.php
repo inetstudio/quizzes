@@ -57,8 +57,13 @@ class ItemsService extends BaseService implements ItemsServiceContract
                 return ['question.'.$key.'.'.$id => $key];
             })->toArray();
 
-            app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract')
-                ->attachToObject(request(), $item, $images, 'quizzes', 'question');
+            resolve(
+                'InetStudio\UploadsPackage\Uploads\Contracts\Actions\AttachMediaToObjectActionContract',
+                [
+                    'item' => $item,
+                    'media' => Arr::get($data, 'media', []),
+                ]
+            )->execute();
 
             $questions[$id] = $item;
         }

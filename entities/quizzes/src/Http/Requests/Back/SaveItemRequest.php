@@ -3,8 +3,8 @@
 namespace InetStudio\QuizzesPackage\Quizzes\Http\Requests\Back;
 
 use Illuminate\Foundation\Http\FormRequest;
-use InetStudio\Uploads\Validation\Rules\CropSize;
-use InetStudio\Uploads\Validation\Rules\CropRequired;
+use InetStudio\UploadsPackage\Uploads\Validation\Rules\CropSize;
+use InetStudio\UploadsPackage\Uploads\Validation\Rules\CropRequired;
 use InetStudio\QuizzesPackage\Quizzes\Contracts\Http\Requests\Back\SaveItemRequestContract;
 
 /**

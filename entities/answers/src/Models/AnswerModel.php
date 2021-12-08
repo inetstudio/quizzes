@@ -5,7 +5,7 @@ namespace InetStudio\QuizzesPackage\Answers\Models;
 use OwenIt\Auditing\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use InetStudio\Uploads\Models\Traits\HasImages;
+use InetStudio\UploadsPackage\Uploads\Models\Traits\HasMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -17,7 +17,7 @@ use InetStudio\QuizzesPackage\Answers\Contracts\Models\AnswerModelContract;
  */
 class AnswerModel extends Model implements AnswerModelContract
 {
-    use HasImages;
+    use HasMedia;
     use Auditable;
     use SoftDeletes;
     use BuildQueryScopeTrait;
@@ -33,16 +33,6 @@ class AnswerModel extends Model implements AnswerModelContract
      * @var bool
      */
     protected $auditTimestamps = true;
-
-    /**
-     * Настройки для генерации изображений.
-     *
-     * @var array
-     */
-    protected $images = [
-        'config' => 'quizzes',
-        'model' => 'answer',
-    ];
 
     /**
      * Связанная с моделью таблица.
@@ -191,5 +181,10 @@ class AnswerModel extends Model implements AnswerModelContract
             )
             ->withPivot('association')
             ->withTimestamps();
+    }
+
+    public function getMediaConfig(): array
+    {
+        return config('quizzes.media', []);
     }
 }

@@ -5,7 +5,7 @@ namespace InetStudio\QuizzesPackage\Results\Models;
 use OwenIt\Auditing\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use InetStudio\Uploads\Models\Traits\HasImages;
+use InetStudio\UploadsPackage\Uploads\Models\Traits\HasMedia;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -16,7 +16,7 @@ use InetStudio\QuizzesPackage\Results\Contracts\Models\ResultModelContract;
 class ResultModel extends Model implements ResultModelContract
 {
     use Auditable;
-    use HasImages;
+    use HasMedia;
     use HasWidgets;
     use SoftDeletes;
     use BuildQueryScopeTrait;
@@ -24,11 +24,6 @@ class ResultModel extends Model implements ResultModelContract
     const ENTITY_TYPE = 'quizzes_result';
 
     protected bool $auditTimestamps = true;
-
-    protected $images = [
-        'config' => 'quizzes',
-        'model' => 'result',
-    ];
 
     protected $table = 'quizzes_results';
 
@@ -192,5 +187,10 @@ class ResultModel extends Model implements ResultModelContract
             'result_id',
             'tag_id'
         )->withTimestamps();
+    }
+
+    public function getMediaConfig(): array
+    {
+        return config('quizzes.media', []);
     }
 }

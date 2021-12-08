@@ -5,7 +5,7 @@ namespace InetStudio\QuizzesPackage\Quizzes\Models;
 use OwenIt\Auditing\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use InetStudio\Uploads\Models\Traits\HasImages;
+use InetStudio\UploadsPackage\Uploads\Models\Traits\HasMedia;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -20,7 +20,7 @@ use InetStudio\QuizzesPackage\Questions\Contracts\Models\QuestionModelContract;
 class QuizModel extends Model implements QuizModelContract
 {
     use Auditable;
-    use HasImages;
+    use HasMedia;
     use SoftDeletes;
     use BuildQueryScopeTrait;
 
@@ -35,16 +35,6 @@ class QuizModel extends Model implements QuizModelContract
      * @var bool
      */
     protected $auditTimestamps = true;
-
-    /**
-     * Настройки для генерации изображений.
-     *
-     * @var array
-     */
-    protected $images = [
-        'config' => 'quizzes',
-        'model' => 'quiz',
-    ];
 
     /**
      * Связанная с моделью таблица.
@@ -242,5 +232,10 @@ class QuizModel extends Model implements QuizModelContract
             'quiz_id',
             'id'
         );
+    }
+
+    public function getMediaConfig(): array
+    {
+        return config('quizzes.media', []);
     }
 }

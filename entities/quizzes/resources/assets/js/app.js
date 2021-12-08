@@ -1,13 +1,14 @@
+import {quizzes} from './package/quizzes';
+
 require('./plugins/tinymce/plugins/quizzes');
 
 require('../../../../../../widgets/entities/widgets/resources/assets/js/mixins/widget');
 
 require('./stores/quizzes-package');
 
-Vue.component(
+window.Vue.component(
     'QuizWidget',
-    require('./components/partials/QuizWidget/QuizWidget.vue').default,
+    () => import('./components/partials/QuizWidget/QuizWidget.vue'),
 );
 
-let quizzes = require('./package/quizzes.js');
 quizzes.init();

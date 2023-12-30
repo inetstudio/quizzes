@@ -18,7 +18,7 @@ class ItemTransformer extends BaseTransformer implements ItemTransformerContract
     /**
      * @var array
      */
-    protected $defaultIncludes = [
+    protected array $defaultIncludes = [
         'preview', 'questions',
     ];
 
